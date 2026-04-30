@@ -1,13 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const gradients = [
   "from-cyan-400/40 via-cyan-500/10 to-slate-900",
@@ -16,109 +12,170 @@ const gradients = [
 ];
 
 export function ProjectsRail({ repos }) {
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const hoverActiveRef = useRef(false);
+  const targetScrollRef = useRef(0);
+  const frameRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track) return;
+    const node = scrollerRef.current;
+    if (!node) return;
 
-    const distance = track.scrollWidth - window.innerWidth;
-    if (distance <= 0) return;
+    targetScrollRef.current = node.scrollLeft;
 
-    const tween = gsap.to(track, {
-      x: -distance,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: `+=${distance + 600}`,
-        pin: true,
-        scrub: 1,
-      },
-    });
+    const animateScroll = () => {
+      const current = node.scrollLeft;
+      const target = targetScrollRef.current;
+      const next = current + (target - current) * 0.14;
+
+      if (Math.abs(target - current) < 0.6) {
+        node.scrollLeft = target;
+        frameRef.current = null;
+        return;
+      }
+
+      node.scrollLeft = next;
+      frameRef.current = window.requestAnimationFrame(animateScroll);
+    };
+
+    const startAnimation = () => {
+      if (frameRef.current !== null) return;
+      frameRef.current = window.requestAnimationFrame(animateScroll);
+    };
+
+    const onEnter = () => {
+      hoverActiveRef.current = true;
+    };
+
+    const onLeave = () => {
+      hoverActiveRef.current = false;
+    };
+
+    const onWheelScroll = (event) => {
+      if (!hoverActiveRef.current) return;
+
+      const canScrollHorizontally = node.scrollWidth > node.clientWidth;
+      if (!canScrollHorizontally) return;
+
+      const delta =
+        Math.abs(event.deltaY) > Math.abs(event.deltaX)
+          ? event.deltaY
+          : event.deltaX;
+      if (delta === 0) return;
+
+      const maxScroll = node.scrollWidth - node.clientWidth;
+      const currentTarget = targetScrollRef.current;
+      const atStart = currentTarget <= 0;
+      const atEnd = currentTarget >= maxScroll;
+      const movingLeft = delta < 0;
+      const movingRight = delta > 0;
+
+      if ((atStart && movingLeft) || (atEnd && movingRight)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      targetScrollRef.current = Math.max(
+        0,
+        Math.min(maxScroll, currentTarget + delta * 1.2),
+      );
+      startAnimation();
+    };
+
+    const onNativeScroll = () => {
+      if (frameRef.current === null) {
+        targetScrollRef.current = node.scrollLeft;
+      }
+    };
+
+    node.addEventListener("mouseenter", onEnter);
+    node.addEventListener("mouseleave", onLeave);
+    node.addEventListener("wheel", onWheelScroll, { passive: false });
+    node.addEventListener("scroll", onNativeScroll, { passive: true });
 
     return () => {
-      tween.kill();
-      ScrollTrigger.getAll().forEach((item) => item.kill());
+      node.removeEventListener("mouseenter", onEnter);
+      node.removeEventListener("mouseleave", onLeave);
+      node.removeEventListener("wheel", onWheelScroll);
+      node.removeEventListener("scroll", onNativeScroll);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
     };
   }, [repos]);
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="projects-shell px-6 py-24"
-    >
+    <section id="projects" className="projects-shell px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <p className="section-eyebrow">Projects</p>
         <h2 className="section-title">Horizontal Case Study Rail</h2>
       </div>
 
-      <div
-        ref={trackRef}
-        className="projects-track mt-10 flex w-max gap-6 px-6"
-      >
-        {repos.map((repo, index) => (
-          <article
-            key={repo.id}
-            className="project-card"
-            data-cursor="View"
-            data-magnetic
-            data-magnetic-strength="0.06"
-            data-magnetic-scale="1.01"
-          >
-            <div
-              className={`project-media bg-linear-to-br ${gradients[index % gradients.length]}`}
+      <div ref={scrollerRef} className="projects-scroller mt-10 px-6">
+        <div className="projects-track flex w-max gap-6">
+          {repos.map((repo, index) => (
+            <article
+              key={repo.id}
+              className="project-card"
+              data-cursor="View"
+              data-magnetic
+              data-magnetic-strength="0.06"
+              data-magnetic-scale="1.01"
             >
-              <div className="scanline" />
-              <p className="project-name">{repo.name}</p>
-            </div>
-            <div className="project-overlay">
-              <p className="line-clamp-3 text-slate-300">{repo.description}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {[repo.language, ...repo.topics.slice(0, 2)].map((item) => (
-                  <span key={`${repo.id}-${item}`} className="chip">
-                    {item}
-                  </span>
-                ))}
+              <div
+                className={`project-media bg-linear-to-br ${gradients[index % gradients.length]}`}
+              >
+                <div className="scanline" />
+                <p className="project-name">{repo.name}</p>
               </div>
-              <div className="mt-5 flex gap-4 text-sm">
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="link-cyan"
-                  data-cursor="Open"
-                >
-                  <FaGithub /> Code
-                </a>
-                {repo.homepage ? (
+              <div className="project-overlay">
+                <p className="line-clamp-3 text-slate-300">
+                  {repo.description}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {[repo.language, ...repo.topics.slice(0, 2)].map((item) => (
+                    <span key={`${repo.id}-${item}`} className="chip">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-5 flex gap-4 text-sm">
                   <a
-                    href={repo.homepage}
+                    href={repo.html_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="link-violet"
+                    className="link-cyan"
                     data-cursor="Open"
                   >
-                    <ExternalLink size={14} /> Live
+                    <FaGithub /> Code
                   </a>
-                ) : null}
-                <button
-                  type="button"
-                  onClick={() => setActiveProject(repo)}
-                  className="ml-auto text-cyan-300 hover:text-cyan-200"
-                  data-magnetic
-                  data-magnetic-strength="0.16"
-                >
-                  View Case Study
-                </button>
+                  {repo.homepage ? (
+                    <a
+                      href={repo.homepage}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-violet"
+                      data-cursor="Open"
+                    >
+                      <ExternalLink size={14} /> Live
+                    </a>
+                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => setActiveProject(repo)}
+                    className="ml-auto text-cyan-300 hover:text-cyan-200"
+                    data-magnetic
+                    data-magnetic-strength="0.16"
+                  >
+                    View Case Study
+                  </button>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>

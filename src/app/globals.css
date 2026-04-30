@@ -460,7 +460,28 @@ section {
 }
 
 .projects-shell {
-  min-height: 100vh;
+  min-height: auto;
+  overflow: hidden;
+}
+
+.projects-scroller {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projects-scroller::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.projects-track {
+  min-width: max-content;
 }
 
 .project-card {
