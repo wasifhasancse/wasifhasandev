@@ -5,7 +5,7 @@ import { aboutProfile, aboutStats, storySteps } from "../lib/siteData";
 
 export function AboutStory() {
   return (
-    <section id="story" className="px-6 py-24">
+    <section id="story" className="px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <p className="section-eyebrow">About Me</p>
         <h2 className="section-title">How I Grew into a Product Builder</h2>

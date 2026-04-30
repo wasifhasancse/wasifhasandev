@@ -53,7 +53,10 @@ export function ContactGlow() {
   };
 
   return (
-    <section id="contact" className="px-6 py-24 relative overflow-hidden">
+    <section
+      id="contact"
+      className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-24"
+    >
       {/* Animated background elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/3 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl" />

@@ -34,7 +34,10 @@ export function GitHubNeon({ profile }) {
   ];
 
   return (
-    <section id="github" className="px-6 py-24 relative overflow-hidden">
+    <section
+      id="github"
+      className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-24"
+    >
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-cyan-500/5 via-transparent to-blue-500/5" />
 
       <div className="mx-auto max-w-6xl">

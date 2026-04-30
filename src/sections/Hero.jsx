@@ -11,9 +11,9 @@ export function Hero({ profileImage }) {
   const [heroImage, setHeroImage] = useState(profileImage || defaultImage);
 
   return (
-    <section id="home" className="hero-section min-h-screen px-6">
-      <div className="hero-shell mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
-        <div className="hero-content">
+    <section id="home" className="hero-section min-h-screen px-4 sm:px-6">
+      <div className="hero-shell mx-auto grid max-w-7xl items-center gap-8 lg:gap-12 lg:grid-cols-[1.12fr_0.88fr]">
+        <div className="hero-content order-2 lg:order-1">
           <p className="hero-kicker animate__animated animate__fadeInDown">
             Product-Focused Full-Stack Web Developer
           </p>
@@ -130,7 +130,7 @@ export function Hero({ profileImage }) {
           initial={{ opacity: 0, y: 24, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9 }}
-          className="hero-visual"
+          className="hero-visual order-1 lg:order-2"
         >
           <div className="hero-avatar-shell" data-cursor="Profile">
             <span className="hero-orbit hero-orbit-a" aria-hidden="true" />

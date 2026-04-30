@@ -78,8 +78,10 @@ export function Navbar() {
             >
               <span className="navbar-brand-mark">WH</span>
               <span className="navbar-brand-copy">
-                <strong>Wasif Hasan</strong>
-                <small>Full Stack Developer</small>
+                <strong className="text-[0.84rem] sm:text-[0.9rem]">
+                  Wasif Hasan
+                </strong>
+                <small className="hidden sm:block">Full Stack Developer</small>
               </span>
             </a>
 

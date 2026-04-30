@@ -1,9 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { skillNodes } from "../lib/siteData";
 
 export function SkillsOrbital() {
+  const [orbitalRadius, setOrbitalRadius] = useState(220);
+
+  useEffect(() => {
+    const updateRadius = () => {
+      const width = window.innerWidth;
+
+      if (width < 640) {
+        setOrbitalRadius(148);
+        return;
+      }
+
+      if (width < 1024) {
+        setOrbitalRadius(182);
+        return;
+      }
+
+      setOrbitalRadius(220);
+    };
+
+    updateRadius();
+    window.addEventListener("resize", updateRadius);
+
+    return () => {
+      window.removeEventListener("resize", updateRadius);
+    };
+  }, []);
+
   const categoryOrder = [
     "Frontend",
     "Backend",
@@ -38,7 +66,7 @@ export function SkillsOrbital() {
   ).length;
 
   return (
-    <section id="skills" className="px-6 py-24">
+    <section id="skills" className="px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <p className="section-eyebrow">Skills</p>
         <h2 className="section-title">Orbital Skill Matrix</h2>
@@ -105,8 +133,8 @@ export function SkillsOrbital() {
           >
             {skillNodes.map((skill, index) => {
               const angle = (index / skillNodes.length) * Math.PI * 2;
-              const x = Math.cos(angle) * 220;
-              const y = Math.sin(angle) * 220;
+              const x = Math.cos(angle) * orbitalRadius;
+              const y = Math.sin(angle) * orbitalRadius;
               const Icon = skill.icon;
 
               return (

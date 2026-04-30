@@ -14,7 +14,7 @@ export function ExperienceEducation() {
   const Icon = isExperience ? BriefcaseBusiness : GraduationCap;
 
   return (
-    <section id="experience" className="px-6 py-24">
+    <section id="experience" className="px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <p className="section-eyebrow">Journey</p>
         <h2 className="section-title">
