@@ -5,6 +5,10 @@ import { useState } from "react";
 
 export function ContactGlow() {
   const [status, setStatus] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const email = "wasifhasancse@gmail.com";
+  const phone = "+8801712345678";
+  const whatsapp = "+8801712345678";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,22 +23,33 @@ export function ContactGlow() {
   const submit = async (event) => {
     event.preventDefault();
     setStatus("loading");
+    setErrorMessage("");
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (!response.ok) {
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        setErrorMessage(
+          payload?.error || "Something went wrong. Please try again.",
+        );
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+        return;
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 2200);
+    } catch {
+      setErrorMessage("Network issue detected. Please try again.");
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
-      return;
     }
-
-    setStatus("success");
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus("idle"), 2200);
   };
 
   return (
@@ -52,226 +67,259 @@ export function ContactGlow() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="contact-hero mb-14"
         >
-          <p className="section-eyebrow">Contact</p>
-          <h2 className="section-title">Let&apos;s Create Something Bold</h2>
-          <p className="exp-summary mt-4 max-w-3xl text-slate-300">
-            Have an idea or a project in mind? I&apos;d love to hear from you.
-            Let&apos;s collaborate and bring your vision to life.
-          </p>
+          <div className="contact-hero-copy">
+            <p className="section-eyebrow">Get In Touch</p>
+            <h2 className="section-title">Let&apos;s Create Something Bold</h2>
+            <p className="exp-summary mt-4 max-w-2xl text-slate-300">
+              Have an idea or a project in mind? I&apos;d love to hear from you.
+              Let&apos;s collaborate and bring your vision to life.
+            </p>
+          </div>
         </motion.div>
 
-        <motion.form
-          onSubmit={submit}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="relative rounded-3xl border border-cyan-400/25 bg-linear-to-br from-slate-900/70 via-slate-950/70 to-slate-950/80 backdrop-blur-2xl overflow-hidden shadow-2xl shadow-cyan-500/10"
+          className="contact-content-grid"
         >
-          {/* Decorative top glow */}
-          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
+          <aside className="contact-hero-card">
+            <p className="contact-hero-card-title">Direct Contact</p>
+            <a href={`mailto:${email}`} className="contact-hero-item">
+              <span>Email</span>
+              <strong>{email}</strong>
+            </a>
+            <a href={`tel:${phone}`} className="contact-hero-item">
+              <span>Phone</span>
+              <strong>{phone}</strong>
+            </a>
+            <a
+              href={`https://wa.me/${whatsapp.replace(/[^\d]/g, "")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="contact-hero-item"
+            >
+              <span>WhatsApp</span>
+              <strong>{whatsapp}</strong>
+            </a>
+          </aside>
 
-          <div className="relative p-8 md:p-14">
-            {/* Form fields grid */}
-            <div className="grid gap-7 md:grid-cols-2 mb-8">
+          <motion.form
+            onSubmit={submit}
+            className="relative rounded-3xl border border-cyan-400/25 bg-linear-to-br from-slate-900/70 via-slate-950/70 to-slate-950/80 backdrop-blur-2xl overflow-hidden shadow-2xl shadow-cyan-500/10"
+          >
+            {/* Decorative top glow */}
+            <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
+
+            <div className="relative p-8 md:p-14">
+              {/* Form fields grid */}
+              <div className="grid gap-7 md:grid-cols-2 mb-8">
+                <motion.label
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="float-field group"
+                >
+                  <input
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder=" "
+                    className="contact-input"
+                  />
+                  <span className="contact-float-label">Full Name</span>
+                </motion.label>
+
+                <motion.label
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                  viewport={{ once: true }}
+                  className="float-field group"
+                >
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder=" "
+                    className="contact-input"
+                  />
+                  <span className="contact-float-label">Email Address</span>
+                </motion.label>
+              </div>
+
+              {/* Message textarea */}
               <motion.label
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0.2 }}
                 viewport={{ once: true }}
-                className="float-field group"
+                className="float-field block group mb-8"
               >
-                <input
-                  name="name"
-                  value={formData.name}
+                <textarea
+                  name="message"
+                  rows={7}
+                  value={formData.message}
                   onChange={handleChange}
                   required
                   placeholder=" "
                   className="contact-input"
                 />
-                <span>Full Name</span>
+                <span className="contact-float-label">Your Message</span>
               </motion.label>
 
-              <motion.label
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
+              {/* Button and status */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
                 viewport={{ once: true }}
-                className="float-field group"
+                className="flex items-center justify-between gap-4"
               >
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder=" "
-                  className="contact-input"
-                />
-                <span>Email Address</span>
-              </motion.label>
-            </div>
+                <motion.button
+                  whileTap={{ scale: 0.93 }}
+                  whileHover={{ scale: 1.05 }}
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="contact-submit-btn group relative overflow-hidden"
+                  data-cursor="Send"
+                  data-magnetic
+                  data-magnetic-strength="0.15"
+                >
+                  {/* Button glow effect */}
+                  <div className="absolute inset-0 bg-linear-to-r from-cyan-500/30 to-blue-500/30 opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
 
-            {/* Message textarea */}
-            <motion.label
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-              className="float-field block group mb-8"
-            >
-              <textarea
-                name="message"
-                rows={7}
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder=" "
-                className="contact-input"
-              />
-              <span>Your Message</span>
-            </motion.label>
+                  {/* Button shine effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
 
-            {/* Button and status */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.25 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-between gap-4"
-            >
-              <motion.button
-                whileTap={{ scale: 0.93 }}
-                whileHover={{ scale: 1.05 }}
-                type="submit"
-                disabled={status === "loading"}
-                className="contact-submit-btn group relative overflow-hidden"
-                data-cursor="Send"
-                data-magnetic
-                data-magnetic-strength="0.15"
-              >
-                {/* Button glow effect */}
-                <div className="absolute inset-0 bg-linear-to-r from-cyan-500/30 to-blue-500/30 opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
-
-                {/* Button shine effect */}
-                <motion.div
-                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-
-                <span className="relative block py-3 px-8 font-semibold">
-                  {status === "loading" ? (
-                    <span className="flex items-center gap-2">
-                      <svg
-                        className="w-4 h-4 animate-spin"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
+                  <span className="relative block py-3 px-8 font-semibold">
+                    {status === "loading" ? (
+                      <span className="flex items-center gap-2">
+                        <svg
+                          className="w-4 h-4 animate-spin"
+                          fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
-                          opacity="0.25"
-                        />
-                        <path
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            opacity="0.25"
+                          />
+                          <path
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : status === "success" ? (
+                      <span className="flex items-center gap-2">
+                        <svg
+                          className="w-5 h-5"
                           fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : status === "success" ? (
-                    <span className="flex items-center gap-2">
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Message Sent
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      <span>Send Message</span>
-                      <svg
-                        className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 7l5 5m0 0l-5 5m5-5H6"
-                        />
-                      </svg>
-                    </span>
-                  )}
-                </span>
-              </motion.button>
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Message Sent
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <span>Send Message</span>
+                        <svg
+                          className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
+                      </span>
+                    )}
+                  </span>
+                </motion.button>
 
-              {/* Loading indicator dots */}
+                {/* Loading indicator dots */}
+                <AnimatePresence>
+                  {status === "loading" && (
+                    <div className="flex gap-2">
+                      {[0, 1, 2].map((i) => (
+                        <motion.div
+                          key={i}
+                          className="w-2.5 h-2.5 rounded-full bg-linear-to-r from-cyan-400 to-blue-400"
+                          animate={{
+                            scale: [1, 1.4, 1],
+                            opacity: [0.6, 1, 0.6],
+                          }}
+                          transition={{
+                            delay: i * 0.15,
+                            repeat: Infinity,
+                            duration: 1,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Error message */}
               <AnimatePresence>
-                {status === "loading" && (
-                  <div className="flex gap-2">
-                    {[0, 1, 2].map((i) => (
-                      <motion.div
-                        key={i}
-                        className="w-2.5 h-2.5 rounded-full bg-linear-to-r from-cyan-400 to-blue-400"
-                        animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
-                        transition={{
-                          delay: i * 0.15,
-                          repeat: Infinity,
-                          duration: 1,
-                        }}
+                {status === "error" && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="mt-4 text-sm text-rose-400 flex items-center gap-2 font-medium"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
                       />
-                    ))}
-                  </div>
+                    </svg>
+                    <span>
+                      {errorMessage ||
+                        "Something went wrong. Please try again."}
+                    </span>
+                  </motion.p>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
 
-            {/* Error message */}
-            <AnimatePresence>
-              {status === "error" && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mt-4 text-sm text-rose-400 flex items-center gap-2 font-medium"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>Something went wrong. Please try again.</span>
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Decorative bottom glow */}
-          <div className="absolute bottom-0 inset-x-0 h-px bg-linear-to-r from-transparent via-blue-400/30 to-transparent" />
-        </motion.form>
+            {/* Decorative bottom glow */}
+            <div className="absolute bottom-0 inset-x-0 h-px bg-linear-to-r from-transparent via-blue-400/30 to-transparent" />
+          </motion.form>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

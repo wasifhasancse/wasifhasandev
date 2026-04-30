@@ -15,6 +15,7 @@ import { Hero } from "../sections/Hero";
 import { ProjectsRail } from "../sections/ProjectsRail";
 import { SkillsOrbital } from "../sections/SkillsOrbital";
 import { CustomCursor } from "./CustomCursor";
+import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -136,6 +137,7 @@ export function PortfolioClient({ repos, profile }) {
         <AIAsk />
         <ContactGlow />
       </main>
+      <Footer />
     </>
   );
 }
