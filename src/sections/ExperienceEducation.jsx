@@ -18,8 +18,13 @@ export function ExperienceEducation() {
       <div className="mx-auto max-w-6xl">
         <p className="section-eyebrow">Journey</p>
         <h2 className="section-title">
-          {isExperience ? "Experience" : "Education"}
+          {isExperience ? "Professional Experience" : "Education & Training"}
         </h2>
+        <p className="exp-summary mt-4 max-w-3xl text-slate-300">
+          {isExperience
+            ? "Teaching, training, and software mentoring roles focused on practical skills, student outcomes, and industry-ready development habits."
+            : "Academic background and structured learning tracks that support my full-stack engineering foundation."}
+        </p>
 
         <div className="exp-tabs mt-8">
           <button
@@ -30,7 +35,7 @@ export function ExperienceEducation() {
             data-magnetic
             data-magnetic-strength="0.14"
           >
-            Experience
+            Professional Experience
           </button>
           <button
             type="button"

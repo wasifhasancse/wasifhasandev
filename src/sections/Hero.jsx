@@ -7,38 +7,73 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MagneticButton } from "../components/MagneticButton";
 
 export function Hero({ profileImage }) {
-  const letters = "Build. Animate. Ship.".split("");
   const defaultImage = "/profile-card.svg";
   const [heroImage, setHeroImage] = useState(profileImage || defaultImage);
 
   return (
-    <section id="home" className="hero-section min-h-screen px-6 pt-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <p className="animate__animated animate__fadeInDown mb-5 text-xs tracking-[0.35em] text-cyan-300 uppercase">
-            Awwwards Inspired Developer Portfolio
+    <section id="home" className="hero-section min-h-screen px-6">
+      <div className="hero-shell mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
+        <div className="hero-content">
+          <p className="hero-kicker animate__animated animate__fadeInDown">
+            Product-Focused Full-Stack Web Developer
           </p>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-6xl">
-            Hi, I am <span className="hero-name-gradient">Wasif Hasan</span>
+          <h1 className="hero-title text-4xl font-bold text-white sm:text-6xl">
+            Building real products for real users
+            <br />
+            with <span className="hero-name-gradient">Wasif Hasan</span>
           </h1>
-          <div className="mt-3 flex flex-wrap gap-1 text-slate-200">
-            {letters.map((char, index) => (
-              <motion.span
-                key={`${char}-${index}`}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.03 }}
-                className="inline-block"
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
-          </div>
-          <p className="mt-6 max-w-xl text-slate-300">
-            Full-stack developer crafting immersive, high-performance
-            experiences with precise interactions, motion design, and scalable
-            architecture.
+          <p className="hero-lead mt-6 max-w-2xl text-slate-200">
+            I design and develop production-ready web applications with clean
+            architecture, fast interfaces, and reliable APIs. My work focuses on
+            solving business problems, not just shipping demos.
           </p>
+          <p className="hero-sublead mt-3 max-w-2xl text-slate-300">
+            Core stack: Next.js, React, Node.js, Express, MongoDB, and modern UI
+            engineering with motion and performance in mind.
+          </p>
+
+          <div className="hero-stack mt-6" aria-label="Primary stack">
+            <span
+              className="chip hero-stack-chip"
+              data-magnetic
+              data-magnetic-strength="0.15"
+              data-magnetic-scale="1.06"
+            >
+              Next.js
+            </span>
+            <span
+              className="chip hero-stack-chip"
+              data-magnetic
+              data-magnetic-strength="0.15"
+              data-magnetic-scale="1.06"
+            >
+              React
+            </span>
+            <span
+              className="chip hero-stack-chip"
+              data-magnetic
+              data-magnetic-strength="0.15"
+              data-magnetic-scale="1.06"
+            >
+              Node.js
+            </span>
+            <span
+              className="chip hero-stack-chip"
+              data-magnetic
+              data-magnetic-strength="0.15"
+              data-magnetic-scale="1.06"
+            >
+              Express
+            </span>
+            <span
+              className="chip hero-stack-chip"
+              data-magnetic
+              data-magnetic-strength="0.15"
+              data-magnetic-scale="1.06"
+            >
+              MongoDB
+            </span>
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <MagneticButton
@@ -69,9 +104,10 @@ export function Hero({ profileImage }) {
               target="_blank"
               rel="noreferrer"
               data-cursor="Open"
-              className="hover:text-cyan-300"
+              className="hero-social-link"
               data-magnetic
-              data-magnetic-strength="0.24"
+              data-magnetic-strength="0.2"
+              data-magnetic-scale="1.08"
             >
               <FaGithub />
             </a>
@@ -80,9 +116,10 @@ export function Hero({ profileImage }) {
               target="_blank"
               rel="noreferrer"
               data-cursor="Open"
-              className="hover:text-cyan-300"
+              className="hero-social-link"
               data-magnetic
-              data-magnetic-strength="0.24"
+              data-magnetic-strength="0.2"
+              data-magnetic-scale="1.08"
             >
               <FaLinkedin />
             </a>
@@ -90,28 +127,30 @@ export function Hero({ profileImage }) {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, rotateY: 8, y: 20 }}
-          animate={{ opacity: 1, rotateY: 0, y: 0 }}
+          initial={{ opacity: 0, y: 24, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9 }}
-          className="tilt-card"
-          data-cursor="View"
-          data-magnetic
-          data-magnetic-strength="0.08"
-          data-magnetic-scale="1.01"
+          className="hero-visual"
         >
-          <div className="tilt-shimmer" />
-          <div className="hero-image-frame">
-            <Image
-              src={heroImage}
-              alt="Wasif Hasan Profile"
-              fill
-              sizes="(max-width: 1024px) 90vw, 40vw"
-              priority
-              className="hero-image"
-              onError={() => setHeroImage(defaultImage)}
-            />
+          <div className="hero-avatar-shell" data-cursor="Profile">
+            <span className="hero-orbit hero-orbit-a" aria-hidden="true" />
+            <span className="hero-orbit hero-orbit-b" aria-hidden="true" />
+            <span className="hero-orbit hero-orbit-c" aria-hidden="true" />
+            <div className="hero-image-frame">
+              <Image
+                src={heroImage}
+                alt="Wasif Hasan Profile"
+                fill
+                sizes="(max-width: 1024px) 80vw, 30rem"
+                priority
+                className="hero-image"
+                onError={() => setHeroImage(defaultImage)}
+              />
+            </div>
           </div>
-          <div className="floating-badge">Open to exciting projects</div>
+          <p className="hero-status">
+            Open to internships, freelance, and collaboration
+          </p>
         </motion.div>
       </div>
     </section>

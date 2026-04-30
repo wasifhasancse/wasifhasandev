@@ -27,19 +27,19 @@ export const navItems = [
 
 export const storySteps = [
   {
+    year: "2022",
+    title: "First Professional Frontend Work",
+    text: "Joined Onito Technologies as a React Developer and learned production workflows, reusable components, and team delivery standards.",
+  },
+  {
     year: "2023",
-    title: "Started Building Daily",
-    text: "Turned curiosity into consistency by shipping small UI and JavaScript experiments every week.",
+    title: "Moved into Teaching and Mentorship",
+    text: "Started supporting learners as a Web Instructor (Trainee), helping students debug projects and strengthening my own engineering fundamentals.",
   },
   {
-    year: "2024",
-    title: "Full-Stack Focus",
-    text: "Moved from frontend prototypes into production-like full-stack apps with APIs, auth, and databases.",
-  },
-  {
-    year: "2025+",
-    title: "Polished Product Mindset",
-    text: "Focused on performance, interactions, and storytelling-driven interfaces that feel premium.",
+    year: "2024 - Present",
+    title: "Full-Stack Product Execution",
+    text: "Working as a Web Instructor while building full-stack applications with Next.js, Node.js, and MongoDB, with strong focus on performance and UX quality.",
   },
 ];
 
@@ -70,74 +70,70 @@ export const commandItems = [
 
 export const experienceItems = [
   {
-    title: "Programming Hero",
-    org: "Web Instructor",
-    period: "2024 - Present",
+    title: "Guest Instructor - Computer Science & Technology",
+    org: "Thakurgaon Polytechnic Institute, Thakurgaon",
+    period: "Aug 2025 - Feb 2026 (One Semester)",
+    description:
+      "Conducted lectures and practical lab sessions for Diploma in Engineering students.",
+    details: [
+      "Taught core programming and computer science concepts.",
+      "Assisted students in developing practical coding skills and software logic.",
+    ],
+    highlights: ["Classroom Delivery", "Lab Sessions", "Programming", "CS Fundamentals"],
+  },
+  {
+    title: "Instructor - Computer Science & Technology",
+    org: "Social Polytechnic Institute, Thakurgaon",
+    period: "Jan 2024 - Jul 2025",
+    description:
+      "Delivered academic courses related to programming, databases, and IT fundamentals.",
+    details: [
+      "Supervised student projects and evaluated lab-based performance.",
+      "Guided students in software development practices and problem solving.",
+    ],
+    highlights: ["Programming", "Databases", "IT Fundamentals", "Project Supervision"],
+  },
+  {
+    title: "Senior Trainer - IT Training",
+    org: "Aptouch Computer, Thakurgaon",
+    period: "Jan 2022 - Present",
     isCurrent: true,
     description:
-      "Mentor students through project-based web development tracks and guide practical full-stack learning.",
+      "Provided professional training in Adobe Photoshop, Illustrator, and Microsoft Office.",
     details: [
-      "Provide feedback and guidance to students on coursework and projects.",
-      "Answer questions and provide support in community channels.",
-      "Collaborate with instructors to improve course content and delivery.",
-      "Review modern web trends and MERN stack best practices for learners.",
+      "Trained students in computer fundamentals, application development basics, and internet usage.",
+      "Helped learners develop practical digital and productivity skills.",
     ],
-    highlights: ["Next.js", "Framer Motion", "GSAP", "Tailwind CSS"],
-  },
-  {
-    title: "Programming Hero",
-    org: "Web Instructor (Trainee)",
-    period: "2023 - 2024",
-    description:
-      "Supported early-stage cohorts and contributed to training and course quality.",
-    details: [
-      "Assisted students in debugging JavaScript and React assignments.",
-      "Supported curriculum improvements and practical exercise planning.",
-      "Helped maintain consistency in instructional communication.",
-    ],
-    highlights: ["Node.js", "Express", "MongoDB", "Firebase"],
-  },
-  {
-    title: "Onito Technologies Pvt. Ltd",
-    org: "React Developer",
-    period: "2022",
-    description:
-      "Worked on UI implementation and component integration for production-facing interfaces.",
-    details: [
-      "Built reusable UI components and connected them with application flows.",
-      "Improved responsiveness and layout consistency across devices.",
-      "Collaborated on frontend bug fixes and usability improvements.",
-    ],
-    highlights: ["React", "UI Development", "Component Architecture"],
+    highlights: ["Photoshop", "Illustrator", "MS Office", "Digital Skills"],
   },
 ];
 
 export const educationItems = [
   {
     title: "BSc in Computer Science",
-    org: "University Program",
+    org: "Undergraduate Program",
     period: "Ongoing",
     description:
-      "Studying software engineering principles, algorithms, and systems thinking while applying concepts through real-world web projects.",
+      "Building a strong academic foundation in software engineering, algorithmic thinking, and systems-level problem solving.",
     details: [
-      "Focused on data structures, algorithms, and software engineering fundamentals.",
-      "Applied academic concepts in full-stack project implementations.",
-      "Continuing progression toward advanced systems and architecture topics.",
+      "Studying core areas including data structures, algorithms, OOP, and database systems.",
+      "Applying coursework concepts through practical web application projects.",
+      "Developing stronger analytical and architectural thinking for real software systems.",
     ],
-    highlights: ["DSA", "OOP", "Database", "Software Engineering"],
+    highlights: ["Algorithms", "OOP", "Database Systems", "Software Engineering"],
   },
   {
-    title: "Programming Hero Web Development",
-    org: "Specialized Course Track",
+    title: "Programming Hero - Complete Web Development",
+    org: "Project-Based Professional Training",
     period: "Completed Milestones",
     description:
-      "Completed intensive project-based modules covering modern frontend, backend, and deployment practices with practical capstone apps.",
+      "Completed an intensive project-based track covering modern frontend, backend, and deployment workflows.",
     details: [
-      "Completed frontend modules including React, Next.js, and responsive UI systems.",
-      "Built backend services with Node.js, Express, MongoDB, and Firebase.",
-      "Delivered capstone projects with real-world deployment workflows.",
+      "Built responsive frontend interfaces with React and Next.js.",
+      "Developed backend services using Node.js, Express, MongoDB, and Firebase.",
+      "Delivered capstone projects with version control, testing mindset, and deployment practice.",
     ],
-    highlights: ["React", "Next.js", "Node.js", "Deployment"],
+    highlights: ["React", "Next.js", "Node.js", "MongoDB", "Deployment"],
   },
 ];
 
@@ -161,7 +157,7 @@ export const aiAnswers = [
 ];
 
 export const aboutStats = [
-  { label: "Projects", value: 28, icon: FaFire },
-  { label: "Hours Coding", value: 1800, icon: RiJavascriptFill },
-  { label: "Tech Tools", value: 18, icon: FaReact },
+  { label: "Projects Built", value: 28, icon: FaFire },
+  { label: "Practice Hours", value: 1800, icon: RiJavascriptFill },
+  { label: "Professional Roles", value: 3, icon: FaReact },
 ];

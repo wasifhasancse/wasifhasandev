@@ -89,6 +89,78 @@ section {
   color: #f8fafc;
 }
 
+.hero-section {
+  position: relative;
+  padding-top: clamp(7.8rem, 11vw, 9.4rem);
+  padding-bottom: clamp(3.3rem, 7vw, 6rem);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 82% 22%,
+      rgba(34, 211, 238, 0.14),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 18% 78%,
+      rgba(167, 139, 250, 0.14),
+      transparent 38%
+    );
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-kicker {
+  margin-bottom: 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: #67e8f9;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  line-height: 1.06;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.hero-lead {
+  line-height: 1.72;
+}
+
+.hero-sublead {
+  line-height: 1.68;
+}
+
+.hero-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.hero-stack-chip {
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.hero-stack-chip:hover {
+  color: #cffafe;
+  border-color: rgba(34, 211, 238, 0.35);
+  background: rgba(8, 47, 73, 0.45);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.26);
+}
+
 .hero-cta {
   border: 1px solid rgba(34, 211, 238, 0.5);
   background: linear-gradient(
@@ -128,53 +200,136 @@ section {
   text-shadow: 0 0 24px rgba(167, 139, 250, 0.28);
 }
 
-.tilt-card {
+.hero-visual {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1.6rem;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(12px);
-  transform-style: preserve-3d;
-  box-shadow: 0 18px 55px -28px rgba(34, 211, 238, 0.65);
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+}
+
+.hero-avatar-shell {
+  position: relative;
+  width: min(82vw, 26rem);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
 }
 
 .hero-image-frame {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
+  width: min(74vw, 21rem);
+  aspect-ratio: 1 / 1;
+  margin: 0;
   overflow: hidden;
-  border-radius: 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  background: rgba(2, 6, 23, 0.85);
+  box-shadow:
+    0 0 0 10px rgba(15, 23, 42, 0.74),
+    0 0 0 22px rgba(34, 211, 238, 0.08),
+    0 22px 46px -24px rgba(34, 211, 238, 0.68);
 }
 
 .hero-image {
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
+  transform: scale(1.05);
 }
 
-.tilt-shimmer {
+.hero-orbit {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  border-radius: 999px;
+  border: 1px dashed rgba(103, 232, 249, 0.24);
   pointer-events: none;
-  background: linear-gradient(
-    120deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.16),
-    transparent 65%
-  );
-  mix-blend-mode: screen;
 }
 
-.floating-badge {
-  position: absolute;
-  left: 1.1rem;
-  bottom: 1.1rem;
+.hero-orbit-a {
+  width: 100%;
+  height: 100%;
+  animation: hero-spin 22s linear infinite;
+}
+
+.hero-orbit-b {
+  width: 86%;
+  height: 86%;
+  border-style: solid;
+  border-color: rgba(167, 139, 250, 0.26);
+  animation: hero-spin-reverse 17s linear infinite;
+}
+
+.hero-orbit-c {
+  width: 66%;
+  height: 66%;
+  border-style: solid;
+  border-color: rgba(244, 114, 182, 0.2);
+  animation: hero-spin 12s linear infinite;
+}
+
+.hero-status {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   border: 1px solid rgba(34, 211, 238, 0.32);
   background: rgba(2, 6, 23, 0.72);
-  padding: 0.45rem 0.7rem;
-  border-radius: 0.75rem;
-  font-size: 0.75rem;
+  padding: 0.52rem 0.92rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #67e8f9;
+}
+
+.hero-social-link {
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  color: #cbd5e1;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.hero-social-link:hover {
+  color: #67e8f9;
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(8, 47, 73, 0.52);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.32);
+}
+
+@keyframes hero-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 7.2rem;
+  }
+
+  .hero-avatar-shell {
+    width: min(88vw, 22rem);
+  }
 }
 
 .glitch {
@@ -247,10 +402,16 @@ section {
   display: inline-flex;
   gap: 0.55rem;
   padding: 0.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  background: rgba(2, 6, 23, 0.7);
+  background:
+    linear-gradient(160deg, rgba(34, 211, 238, 0.08), transparent 48%),
+    rgba(2, 6, 23, 0.72);
   backdrop-filter: blur(10px);
+}
+
+.exp-summary {
+  line-height: 1.68;
 }
 
 .exp-tab-btn {
@@ -283,11 +444,22 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   background:
-    linear-gradient(160deg, rgba(34, 211, 238, 0.04), transparent 42%),
+    linear-gradient(160deg, rgba(34, 211, 238, 0.1), transparent 42%),
+    linear-gradient(20deg, rgba(167, 139, 250, 0.08), transparent 38%),
     rgba(15, 23, 42, 0.58);
   padding: 1.1rem;
   backdrop-filter: blur(12px);
-  box-shadow: 0 16px 34px -30px rgba(34, 211, 238, 0.55);
+  box-shadow: 0 22px 42px -34px rgba(34, 211, 238, 0.62);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.exp-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.28);
+  box-shadow: 0 28px 48px -36px rgba(34, 211, 238, 0.75);
 }
 
 .exp-timeline {
@@ -352,7 +524,7 @@ section {
 
 .exp-subtitle {
   margin: 0.2rem 0 0;
-  color: #a5b4fc;
+  color: #c4b5fd;
   font-size: 0.88rem;
 }
 
@@ -376,7 +548,7 @@ section {
 .exp-details {
   margin: 0.8rem 0 0;
   padding-left: 1.2rem;
-  color: #94a3b8;
+  color: #9fb0c5;
   line-height: 1.65;
 }
 

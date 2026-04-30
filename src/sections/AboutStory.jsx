@@ -7,8 +7,8 @@ export function AboutStory() {
   return (
     <section id="story" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="section-eyebrow">Story</p>
-        <h2 className="section-title">From Curiosity to Craft</h2>
+        <p className="section-eyebrow">Journey Snapshot</p>
+        <h2 className="section-title">How I Grew into a Product Builder</h2>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {aboutStats.map((stat, index) => (
