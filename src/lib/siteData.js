@@ -283,3 +283,20 @@ export const aboutStats = [
   { label: "Practice Hours", value: 1800, icon: RiJavascriptFill },
   { label: "Professional Roles", value: 3, icon: FaReact },
 ];
+
+export const aboutProfile = {
+  intro:
+    "I am Wasif Hasan, a full-stack developer and educator who enjoys turning complex ideas into clean, human-centered digital products. My journey started with curiosity about how web interfaces work, then grew into professional delivery, mentoring, and product-focused engineering.",
+  journey:
+    "From frontend-focused work to end-to-end product building, I learned through real client needs, teaching responsibilities, and consistent project shipping. Building and explaining concepts to learners sharpened both my technical depth and communication style.",
+  workEnjoy:
+    "I enjoy crafting interactive UIs, architecting practical backend flows, and improving performance where users can feel the difference. I am especially motivated by products that need both engineering discipline and thoughtful UX decisions.",
+  hobbies:
+    "Outside programming, I enjoy mentoring students, exploring design trends, reading about product strategy, and staying active through sports and long walks. These habits keep my perspective fresh and improve my problem-solving mindset.",
+  personalityTraits: [
+    "Calm under pressure",
+    "Curious and detail-oriented",
+    "Collaborative communicator",
+    "Growth-focused builder",
+  ],
+};

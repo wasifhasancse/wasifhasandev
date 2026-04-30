@@ -1,14 +1,56 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { aboutStats, storySteps } from "../lib/siteData";
+import { aboutProfile, aboutStats, storySteps } from "../lib/siteData";
 
 export function AboutStory() {
   return (
     <section id="story" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="section-eyebrow">Journey Snapshot</p>
+        <p className="section-eyebrow">About Me</p>
         <h2 className="section-title">How I Grew into a Product Builder</h2>
+
+        <div className="about-intro-grid mt-8">
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="about-intro-main"
+          >
+            <p className="about-intro-kicker">Introduction</p>
+            <p>{aboutProfile.intro}</p>
+            <p>{aboutProfile.journey}</p>
+          </motion.article>
+
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.06 }}
+            className="about-intro-card"
+          >
+            <p className="about-intro-kicker">Craft</p>
+            <h3>Work I Enjoy</h3>
+            <p>{aboutProfile.workEnjoy}</p>
+          </motion.article>
+
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.12 }}
+            className="about-intro-card"
+          >
+            <p className="about-intro-kicker">Personality</p>
+            <h3>Beyond Code</h3>
+            <p>{aboutProfile.hobbies}</p>
+            <div className="about-trait-list">
+              {aboutProfile.personalityTraits.map((trait) => (
+                <span key={trait}>{trait}</span>
+              ))}
+            </div>
+          </motion.article>
+        </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {aboutStats.map((stat, index) => (

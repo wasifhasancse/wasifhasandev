@@ -1,9 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ExternalLink, X } from "lucide-react";
+import { ArrowUpRight, ExternalLink, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import { featuredProjects } from "../lib/projectsData";
 
 const gradients = [
   "from-cyan-400/40 via-cyan-500/10 to-slate-900",
@@ -13,7 +16,6 @@ const gradients = [
 
 export function ProjectsRail({ repos }) {
   const scrollerRef = useRef(null);
-  const hoverActiveRef = useRef(false);
   const targetScrollRef = useRef(0);
   const frameRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null);
@@ -39,22 +41,19 @@ export function ProjectsRail({ repos }) {
       frameRef.current = window.requestAnimationFrame(animateScroll);
     };
 
+    const stopAnimation = () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
+
     const startAnimation = () => {
       if (frameRef.current !== null) return;
       frameRef.current = window.requestAnimationFrame(animateScroll);
     };
 
-    const onEnter = () => {
-      hoverActiveRef.current = true;
-    };
-
-    const onLeave = () => {
-      hoverActiveRef.current = false;
-    };
-
     const onWheelScroll = (event) => {
-      if (!hoverActiveRef.current) return;
-
       const canScrollHorizontally = node.scrollWidth > node.clientWidth;
       if (!canScrollHorizontally) return;
 
@@ -90,25 +89,75 @@ export function ProjectsRail({ repos }) {
       }
     };
 
-    node.addEventListener("mouseenter", onEnter);
-    node.addEventListener("mouseleave", onLeave);
     node.addEventListener("wheel", onWheelScroll, { passive: false });
     node.addEventListener("scroll", onNativeScroll, { passive: true });
 
     return () => {
-      node.removeEventListener("mouseenter", onEnter);
-      node.removeEventListener("mouseleave", onLeave);
       node.removeEventListener("wheel", onWheelScroll);
       node.removeEventListener("scroll", onNativeScroll);
-      if (frameRef.current !== null) {
-        window.cancelAnimationFrame(frameRef.current);
-      }
+      stopAnimation();
     };
   }, [repos]);
 
   return (
     <section id="projects" className="projects-shell px-6 py-24">
       <div className="mx-auto max-w-7xl">
+        <p className="section-eyebrow">Featured Projects</p>
+        <h2 className="section-title">Projects Section</h2>
+        <p className="exp-summary mt-4 max-w-3xl text-slate-300">
+          A curated snapshot of my strongest builds. Explore project details,
+          architecture decisions, and the key challenges solved in development.
+        </p>
+
+        <div className="featured-projects-grid mt-10">
+          {featuredProjects.map((project, index) => (
+            <motion.article
+              key={project.slug}
+              className="featured-project-card"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+            >
+              <div className="featured-project-image-wrap">
+                <Image
+                  src={project.image}
+                  alt={`${project.name} preview`}
+                  fill
+                  className="featured-project-image"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="featured-project-glow" />
+                <span className="featured-project-chip">Case Study</span>
+              </div>
+
+              <div className="featured-project-body">
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+                <div className="featured-project-stack">
+                  {project.stack.slice(0, 3).map((item) => (
+                    <span key={`${project.slug}-${item}`}>{item}</span>
+                  ))}
+                </div>
+
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="featured-project-btn"
+                  data-cursor="Open"
+                  data-magnetic
+                  data-magnetic-strength="0.14"
+                >
+                  <span>{project.detailsLabel}</span>
+                  <ArrowUpRight size={14} />
+                </Link>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-22 max-w-7xl">
         <p className="section-eyebrow">Projects</p>
         <h2 className="section-title">Horizontal Case Study Rail</h2>
       </div>
