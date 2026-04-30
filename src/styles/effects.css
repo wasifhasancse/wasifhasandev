@@ -1,0 +1,85 @@
+:root {
+  --bg-primary: #020617;
+  --bg-panel: rgba(15, 23, 42, 0.68);
+  --text-primary: #e2e8f0;
+}
+
+html[data-theme="neon"] {
+  --bg-primary: #030711;
+  --bg-panel: rgba(9, 16, 34, 0.8);
+  --text-primary: #ecfeff;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.45;
+}
+
+.orb-1 {
+  width: 26rem;
+  height: 26rem;
+  top: -6rem;
+  left: -4rem;
+  background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
+  animation: floatOrb 12s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 24rem;
+  height: 24rem;
+  right: -6rem;
+  top: 22%;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  animation: floatOrb 15s ease-in-out infinite reverse;
+}
+
+.orb-3 {
+  width: 20rem;
+  height: 20rem;
+  left: 40%;
+  bottom: -5rem;
+  background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
+  animation: floatOrb 13s ease-in-out infinite;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 100%);
+}
+
+html[data-theme="neon"] .bg-mesh {
+  background:
+    radial-gradient(
+      circle at 8% 15%,
+      rgba(34, 211, 238, 0.25),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(167, 139, 250, 0.26),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(244, 114, 182, 0.24),
+      transparent 35%
+    ),
+    #030711;
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 28px, 0);
+  }
+}
