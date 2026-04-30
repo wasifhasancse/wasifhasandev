@@ -254,19 +254,27 @@ export const educationItems = [
 export const aiAnswers = [
   {
     q: "What stack does Wasif use?",
-    a: "Wasif works across React, Next.js, Node.js, Express, MongoDB, Firebase, and modern UI animation tools.",
+    a: "Frontend: React 19, Next.js 16 with App Router, Framer Motion, Tailwind CSS v4. Backend: Node.js, Express. Database: MongoDB, Firebase. Tools: GSAP, Lenis, Playwright. Always focused on modern, performant, and animated experiences.",
   },
   {
-    q: "What kind of projects?",
-    a: "Mostly full-stack web apps, interactive interfaces, and developer-focused products with polished UX.",
+    q: "What's your development approach?",
+    a: "Full-stack focused with emphasis on UX/animation engineering. Builds interactive, component-driven applications with custom micro-interactions. Practices test-driven development and maintains clean, semantic code. Loves optimizing performance and creating memorable user experiences.",
   },
   {
-    q: "How to collaborate?",
-    a: "Use the contact section or connect through GitHub and LinkedIn for freelance or collaboration.",
+    q: "What kind of projects do you build?",
+    a: "Full-stack web applications with polished interfaces, real-time dashboards, admin panels, developer tools, and interactive portfolios. Specializes in animation-heavy sites, e-commerce platforms, SaaS products, and data visualization applications.",
   },
   {
-    q: "What makes this portfolio different?",
-    a: "It blends storytelling, custom interactions, and animation engineering instead of template-style layout blocks.",
+    q: "How do you approach collaboration?",
+    a: "Open to freelance projects, contract work, and full-time roles. Communicates clearly, values feedback, and uses agile methodologies. Available via GitHub, LinkedIn, or the contact form. Timezone: Asia/Dhaka. Prefers remote opportunities.",
+  },
+  {
+    q: "What makes your portfolio different?",
+    a: "Authentic storytelling with genuine project experience, not template layouts. Custom animations using Framer Motion and GSAP, magnetic interactions, orbital skill visualizations, and a focus on craft and detail. Every element serves the narrative.",
+  },
+  {
+    q: "Tell me about your experience?",
+    a: "3+ years in full-stack development with roles as Frontend Lead, Full Stack Developer, and Technical Lead. Built 28+ projects, mentored developers, and shipped production applications. Strong foundation in JavaScript/React ecosystem with growing expertise in system design and team leadership.",
   },
 ];
 
