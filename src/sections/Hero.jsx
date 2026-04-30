@@ -2,19 +2,14 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MagneticButton } from "../components/MagneticButton";
 
-function GlitchName() {
-  return (
-    <span className="glitch" data-text="Wasif Hasan">
-      Wasif Hasan
-    </span>
-  );
-}
-
-export function Hero() {
+export function Hero({ profileImage }) {
   const letters = "Build. Animate. Ship.".split("");
+  const defaultImage = "/profile-card.svg";
+  const [heroImage, setHeroImage] = useState(profileImage || defaultImage);
 
   return (
     <section id="home" className="hero-section min-h-screen px-6 pt-28">
@@ -24,7 +19,7 @@ export function Hero() {
             Awwwards Inspired Developer Portfolio
           </p>
           <h1 className="text-4xl font-bold leading-tight text-white sm:text-6xl">
-            Hi, I am <GlitchName />
+            Hi, I am <span className="hero-name-gradient">Wasif Hasan</span>
           </h1>
           <div className="mt-3 flex flex-wrap gap-1 text-slate-200">
             {letters.map((char, index) => (
@@ -57,7 +52,13 @@ export function Hero() {
             >
               View Projects
             </MagneticButton>
-            <a href="/resume.pdf" className="hero-outline" data-cursor="Open">
+            <a
+              href="/resume.pdf"
+              className="hero-outline"
+              data-cursor="Open"
+              data-magnetic
+              data-magnetic-strength="0.2"
+            >
               Download Resume
             </a>
           </div>
@@ -69,6 +70,8 @@ export function Hero() {
               rel="noreferrer"
               data-cursor="Open"
               className="hover:text-cyan-300"
+              data-magnetic
+              data-magnetic-strength="0.24"
             >
               <FaGithub />
             </a>
@@ -78,6 +81,8 @@ export function Hero() {
               rel="noreferrer"
               data-cursor="Open"
               className="hover:text-cyan-300"
+              data-magnetic
+              data-magnetic-strength="0.24"
             >
               <FaLinkedin />
             </a>
@@ -90,16 +95,22 @@ export function Hero() {
           transition={{ duration: 0.9 }}
           className="tilt-card"
           data-cursor="View"
+          data-magnetic
+          data-magnetic-strength="0.08"
+          data-magnetic-scale="1.01"
         >
           <div className="tilt-shimmer" />
-          <Image
-            src="/profile-card.svg"
-            alt="Wasif Hasan Profile"
-            width={480}
-            height={600}
-            priority
-            className="h-auto w-full rounded-3xl"
-          />
+          <div className="hero-image-frame">
+            <Image
+              src={heroImage}
+              alt="Wasif Hasan Profile"
+              fill
+              sizes="(max-width: 1024px) 90vw, 40vw"
+              priority
+              className="hero-image"
+              onError={() => setHeroImage(defaultImage)}
+            />
+          </div>
           <div className="floating-badge">Open to exciting projects</div>
         </motion.div>
       </div>

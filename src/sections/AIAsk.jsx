@@ -24,6 +24,8 @@ export function AIAsk() {
                     ? "border-cyan-300 bg-cyan-400/10 text-cyan-100"
                     : "border-white/10 text-slate-300 hover:border-cyan-300/40"
                 }`}
+                data-magnetic
+                data-magnetic-strength="0.12"
               >
                 {item.q}
               </button>

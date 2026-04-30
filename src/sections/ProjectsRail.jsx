@@ -62,7 +62,14 @@ export function ProjectsRail({ repos }) {
         className="projects-track mt-10 flex w-max gap-6 px-6"
       >
         {repos.map((repo, index) => (
-          <article key={repo.id} className="project-card" data-cursor="View">
+          <article
+            key={repo.id}
+            className="project-card"
+            data-cursor="View"
+            data-magnetic
+            data-magnetic-strength="0.06"
+            data-magnetic-scale="1.01"
+          >
             <div
               className={`project-media bg-linear-to-br ${gradients[index % gradients.length]}`}
             >
@@ -103,6 +110,8 @@ export function ProjectsRail({ repos }) {
                   type="button"
                   onClick={() => setActiveProject(repo)}
                   className="ml-auto text-cyan-300 hover:text-cyan-200"
+                  data-magnetic
+                  data-magnetic-strength="0.16"
                 >
                   View Case Study
                 </button>
@@ -134,6 +143,8 @@ export function ProjectsRail({ repos }) {
                   type="button"
                   onClick={() => setActiveProject(null)}
                   className="text-slate-300"
+                  data-magnetic
+                  data-magnetic-strength="0.16"
                 >
                   <X size={18} />
                 </button>

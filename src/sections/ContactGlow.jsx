@@ -62,6 +62,8 @@ export function ContactGlow() {
             type="submit"
             className="send-btn mt-5"
             data-cursor="Send"
+            data-magnetic
+            data-magnetic-strength="0.18"
           >
             {status === "loading"
               ? "Sending..."

@@ -21,6 +21,8 @@ export function Navbar() {
             href="#home"
             className="text-sm font-semibold tracking-[0.2em] text-cyan-300 uppercase"
             data-cursor="Home"
+            data-magnetic
+            data-magnetic-strength="0.14"
           >
             Wasif.hsn
           </a>
@@ -32,6 +34,8 @@ export function Navbar() {
                 href={`#${id}`}
                 className="nav-link text-sm text-slate-200"
                 data-cursor={label}
+                data-magnetic
+                data-magnetic-strength="0.12"
               >
                 {label}
               </a>
@@ -43,6 +47,8 @@ export function Navbar() {
             onClick={toggleMode}
             className="rounded-full border border-cyan-300/30 px-3 py-1 text-xs text-cyan-200"
             data-cursor="Switch"
+            data-magnetic
+            data-magnetic-strength="0.16"
           >
             {mode === "dark" ? "Neon" : "Dark"} Mode
           </button>
