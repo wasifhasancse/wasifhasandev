@@ -1,7 +1,8 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   FaDiscord,
   FaFacebook,
@@ -112,7 +113,7 @@ const itemVariant = {
 };
 
 /* ─── Animated Input ────────────────────────────────────── */
-function Field({ label, type = "text", rows, placeholder }) {
+function Field({ label, type = "text", rows, placeholder, name }) {
   const [focused, setFocused] = useState(false);
   const [filled, setFilled] = useState(false);
   const Tag = rows ? "textarea" : "input";
@@ -154,6 +155,7 @@ function Field({ label, type = "text", rows, placeholder }) {
           setFilled(!!e.target.value);
         }}
         onChange={(e) => setFilled(!!e.target.value)}
+        name={name}
         className="w-full bg-[#0c0818] border border-white/10 rounded-xl px-4 text-white text-[14px] outline-none resize-none placeholder:text-gray-600"
         style={{
           paddingTop: rows ? "20px" : undefined,
@@ -168,16 +170,28 @@ function Field({ label, type = "text", rows, placeholder }) {
 
 /* ─── Main ──────────────────────────────────────────────── */
 export default function Contact() {
+  const formRef = useRef(null);
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY },
+      );
       setSent(true);
-    }, 1800);
+    } catch {
+      setError("Something went wrong. Please try again or email me directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -435,6 +449,7 @@ export default function Contact() {
                 /* ── Form ── */
                 <motion.form
                   key="form"
+                  ref={formRef}
                   onSubmit={handleSubmit}
                   variants={stagger(0)}
                   initial="hidden"
@@ -442,19 +457,40 @@ export default function Contact() {
                   className="space-y-5"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <Field label="Your Name" placeholder="Wasif..." />
                     <Field
+                      name="from_name"
+                      label="Your Name"
+                      placeholder="Wasif..."
+                    />
+                    <Field
+                      name="from_email"
                       label="Your Email"
                       type="email"
                       placeholder="you@email.com"
                     />
                   </div>
-                  <Field label="Subject" placeholder="Project inquiry..." />
                   <Field
+                    name="subject"
+                    label="Subject"
+                    placeholder="Project inquiry..."
+                  />
+                  <Field
+                    name="message"
                     label="Message"
                     rows={5}
                     placeholder="Tell me about your project..."
                   />
+
+                  {/* Error message */}
+                  {error && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="font-mono text-[12px] text-red-400 text-center"
+                    >
+                      {error}
+                    </motion.p>
+                  )}
 
                   <motion.div variants={itemVariant}>
                     <motion.button
