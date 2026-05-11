@@ -2,8 +2,14 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail, MdLocationOn } from "react-icons/md";
+import {
+  FaDiscord,
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
+import { MdEmail, MdLocationOn, MdWork } from "react-icons/md";
 
 /* ─── Data ─────────────────────────────────────────────── */
 const INFO = [
@@ -11,15 +17,41 @@ const INFO = [
     icon: MdEmail,
     label: "Email",
     val: "wasifhasancse@gmail.com",
+    sub: "Preferred contact method",
     href: "mailto:wasifhasancse@gmail.com",
     accent: "#a855f7",
+  },
+  {
+    icon: FaLinkedin,
+    label: "LinkedIn",
+    val: "linkedin.com/in/wasifhasancse",
+    sub: "Let's connect professionally",
+    href: "https://www.linkedin.com/in/wasifhasancse/",
+    accent: "#0a66c2",
+  },
+  {
+    icon: FaGithub,
+    label: "GitHub",
+    val: "github.com/wasifhasancse",
+    sub: "52+ repos · 626 contributions",
+    href: "https://github.com/wasifhasancse",
+    accent: "#c084fc",
   },
   {
     icon: MdLocationOn,
     label: "Location",
     val: "Bangladesh",
+    sub: "Open to Remote · Worldwide",
     href: "#",
     accent: "#3b82f6",
+  },
+  {
+    icon: MdWork,
+    label: "Availability",
+    val: "Full-time · Remote · Freelance",
+    sub: "Available to start immediately",
+    href: "#",
+    accent: "#22c55e",
   },
 ];
 
@@ -28,13 +60,31 @@ const SOCIALS = [
     icon: FaLinkedin,
     href: "https://www.linkedin.com/in/wasifhasancse/",
     label: "LinkedIn",
-    color: "#0a66c2",
+    color: "#d0e8ff",
+  },
+  {
+    icon: FaDiscord,
+    href: "https://discord.com/users/wasifhasancse#6969",
+    label: "Discord",
+    color: "#48A111",
+  },
+  {
+    icon: FaFacebook,
+    href: "https://www.facebook.com/wasifhasancse",
+    label: "Facebook",
+    color: "#1877f2",
+  },
+  {
+    icon: FaInstagram,
+    href: "https://www.instagram.com/wasifhasancse/",
+    label: "Instagram",
+    color: "#e11d48",
   },
   {
     icon: FaGithub,
     href: "https://github.com/wasifhasancse",
     label: "GitHub",
-    color: "#e2e8f0",
+    color: "#c084fc",
   },
 ];
 
@@ -68,27 +118,29 @@ function Field({ label, type = "text", rows, placeholder }) {
   const Tag = rows ? "textarea" : "input";
 
   return (
-    <motion.div variants={itemVariant} className="relative">
+    <motion.div variants={itemVariant} className="relative pt-3">
+      {/* Floating label — sits above border with bg to mask it */}
       <motion.label
-        className="absolute left-4 font-mono text-[11px] tracking-widest uppercase pointer-events-none transition-all duration-200 z-10"
+        className="absolute left-3.5 font-mono tracking-widest uppercase pointer-events-none z-10 px-1.5 rounded"
         animate={{
-          top: focused || filled ? "-10px" : rows ? "16px" : "50%",
-          y: focused || filled ? 0 : rows ? 0 : "-50%",
+          top: focused || filled ? "0px" : rows ? "28px" : "50%",
+          y: focused || filled ? "-50%" : rows ? "0" : "-50%",
           color: focused ? "#a855f7" : "#6b7280",
           fontSize: focused || filled ? "10px" : "12px",
+          backgroundColor: focused || filled ? "#0c0818" : "transparent",
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
       >
         {label}
       </motion.label>
 
       {/* Focus glow border */}
       <motion.div
-        className="absolute inset-0 rounded-xl pointer-events-none"
+        className="absolute inset-0 top-3 rounded-xl pointer-events-none"
         animate={{ opacity: focused ? 1 : 0 }}
         transition={{ duration: 0.25 }}
         style={{
-          boxShadow: "0 0 0 1.5px #a855f7, 0 0 20px rgba(168,85,247,.18)",
+          boxShadow: "0 0 0 1.5px #a855f7, 0 0 20px rgba(168,85,247,.15)",
         }}
       />
 
@@ -102,11 +154,11 @@ function Field({ label, type = "text", rows, placeholder }) {
           setFilled(!!e.target.value);
         }}
         onChange={(e) => setFilled(!!e.target.value)}
-        className="w-full bg-[#0c0818] border border-white/8 rounded-xl px-4 text-white text-[14px] outline-none resize-none transition-colors duration-200 placeholder:text-gray-600"
+        className="w-full bg-[#0c0818] border border-white/10 rounded-xl px-4 text-white text-[14px] outline-none resize-none placeholder:text-gray-600"
         style={{
-          paddingTop: rows ? "24px" : undefined,
+          paddingTop: rows ? "20px" : undefined,
           paddingBottom: rows ? "12px" : undefined,
-          height: rows ? `${rows * 38}px` : "56px",
+          height: rows ? `${rows * 40}px` : "52px",
           lineHeight: rows ? "1.7" : undefined,
         }}
       />
@@ -221,7 +273,7 @@ export default function Contact() {
             {/* Info card */}
             <motion.div
               variants={fadeUp(0)}
-              className="relative p-7 rounded-3xl border border-white/6 bg-[#0c0818] overflow-hidden flex-1"
+              className="relative p-7 rounded-3xl border border-white/6 bg-[#0c0818] overflow-hidden"
             >
               {/* Top accent */}
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-violet-600 via-fuchsia-500 to-transparent" />
@@ -230,14 +282,16 @@ export default function Contact() {
                 Contact Info
               </p>
 
-              <motion.div variants={stagger(0.15)} className="space-y-4">
-                {INFO.map(({ icon: Icon, label, val, href, accent }) => (
+              <motion.div variants={stagger(0.15)} className="space-y-3.5">
+                {INFO.map(({ icon: Icon, label, val, sub, href, accent }) => (
                   <motion.a
                     key={label}
                     href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
                     variants={itemVariant}
                     whileHover={{ x: 4 }}
-                    className="flex items-center gap-4 group"
+                    className="flex items-center gap-3.5 group"
                   >
                     <motion.div
                       className="w-10 h-10 rounded-xl flex items-center justify-center border shrink-0"
@@ -248,15 +302,20 @@ export default function Contact() {
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <Icon size={17} style={{ color: accent }} />
+                      <Icon size={16} style={{ color: accent }} />
                     </motion.div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-mono text-[10px] tracking-widest uppercase text-gray-600">
                         {label}
                       </p>
-                      <p className="text-white text-[13px] font-medium group-hover:text-violet-300 transition-colors">
+                      <p className="text-white text-[12.5px] font-medium group-hover:text-violet-300 transition-colors truncate">
                         {val}
                       </p>
+                      {sub && (
+                        <p className="text-gray-600 font-mono text-[10px]">
+                          {sub}
+                        </p>
+                      )}
                     </div>
                   </motion.a>
                 ))}
@@ -383,7 +442,7 @@ export default function Contact() {
                   className="space-y-5"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <Field label="Your Name" placeholder="Morsalin..." />
+                    <Field label="Your Name" placeholder="Wasif..." />
                     <Field
                       label="Your Email"
                       type="email"
@@ -401,20 +460,22 @@ export default function Contact() {
                     <motion.button
                       type="submit"
                       disabled={sending}
-                      whileHover={sending ? {} : { scale: 1.02, y: -1 }}
+                      whileHover={sending ? {} : { scale: 1.03, y: -2 }}
                       whileTap={sending ? {} : { scale: 0.97 }}
-                      className="relative w-full py-4 rounded-xl font-bold text-[14px] text-white overflow-hidden disabled:cursor-not-allowed"
+                      className="relative w-full py-3.5 rounded-full font-bold text-[14px] text-white overflow-hidden disabled:cursor-not-allowed group"
                     >
+                      {/* gradient fill */}
                       <motion.span
-                        className="absolute inset-0 bg-linear-to-br from-violet-600 to-fuchsia-500"
+                        className="absolute inset-0 rounded-full bg-linear-to-br from-violet-600 to-fuchsia-500"
                         animate={{ opacity: sending ? 0.6 : [1, 0.82, 1] }}
                         transition={{
                           duration: 3,
                           repeat: sending ? 0 : Infinity,
                         }}
                       />
+                      {/* pulse glow ring */}
                       <motion.span
-                        className="absolute inset-0 rounded-xl"
+                        className="absolute inset-0 rounded-full"
                         animate={{
                           boxShadow: sending
                             ? "0 0 0px rgba(139,92,246,0)"
@@ -426,8 +487,15 @@ export default function Contact() {
                         }}
                         transition={{ duration: 3, repeat: Infinity }}
                       />
-
-                      <span className="relative z-10 flex items-center justify-center gap-2">
+                      {/* shimmer on hover */}
+                      <motion.span
+                        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background:
+                            "linear-gradient(105deg,transparent 38%,rgba(255,255,255,0.13) 50%,transparent 62%)",
+                        }}
+                      />
+                      <span className="relative z-10 flex items-center justify-center gap-2.5">
                         {sending ? (
                           <>
                             <motion.span
@@ -443,7 +511,21 @@ export default function Contact() {
                           </>
                         ) : (
                           <>
+                            {/* paper-plane icon */}
+                            <svg
+                              width="15"
+                              height="15"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z" />
+                            </svg>
                             Send Message
+                            {/* animated arrow */}
                             <motion.span
                               animate={{ x: [0, 4, 0] }}
                               transition={{
@@ -452,7 +534,18 @@ export default function Contact() {
                                 ease: "easeInOut",
                               }}
                             >
-                              →
+                              <svg
+                                width="13"
+                                height="13"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                              </svg>
                             </motion.span>
                           </>
                         )}

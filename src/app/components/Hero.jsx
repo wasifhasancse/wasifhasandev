@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { SiReaddotcv } from "react-icons/si";
 const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/172745014?v=4";
 
 /* ─── Data ─────────────────────────────────────────────── */
@@ -105,7 +106,7 @@ function Particle({ x, y, size, dur, delay }) {
 }
 
 /* ─── Magnetic Button ───────────────────────────────────── */
-function MagBtn({ children, className }) {
+function MagBtn({ children, className, href, download, ...props }) {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -122,17 +123,22 @@ function MagBtn({ children, className }) {
     y.set(0);
   };
 
+  const Tag = href ? motion.a : motion.button;
+
   return (
-    <motion.button
+    <Tag
       ref={ref}
       style={{ x: sx, y: sy }}
       onMouseMove={move}
       onMouseLeave={leave}
       whileTap={{ scale: 0.94 }}
       className={className}
+      href={href}
+      download={download}
+      {...props}
     >
       {children}
-    </motion.button>
+    </Tag>
   );
 }
 
@@ -271,7 +277,7 @@ export default function Hero() {
 
         {/* Avatar */}
         <motion.div
-          className="relative w-32 h-32 mb-9"
+          className="relative w-32 h-32 md:w-40 md:h-40 lg:w-52 lg:h-52 mb-9"
           initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1, delay: 0.12, ease: expo }}
@@ -301,7 +307,7 @@ export default function Hero() {
             <Image
               src={GITHUB_AVATAR}
               alt="Wasif Hasan"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               fill
               priority
               className="object-cover"
@@ -441,55 +447,121 @@ export default function Hero() {
           variants={fadeUp(0.52)}
           className="flex gap-4 flex-wrap justify-center"
         >
-          <MagBtn className="relative px-8 py-3.5 rounded-xl font-bold text-[14px] text-white overflow-hidden group">
+          {/* View Projects — primary pill (matches Hire Me energy) */}
+          <MagBtn
+            href="#projects"
+            className="relative inline-flex items-center gap-2 px-7 py-3 rounded-full font-mono font-bold text-[13px] text-white overflow-hidden group"
+          >
+            {/* gradient fill */}
             <motion.span
-              className="absolute inset-0 bg-linear-to-br from-violet-600 to-fuchsia-500"
+              className="absolute inset-0 rounded-full bg-linear-to-br from-violet-600 to-fuchsia-500"
               animate={{ opacity: [1, 0.82, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
             />
+            {/* pulse glow ring */}
             <motion.span
-              className="absolute inset-0"
+              className="absolute inset-0 rounded-full"
               animate={{
                 boxShadow: [
-                  "0 0 18px rgba(139,92,246,.38)",
-                  "0 0 38px rgba(139,92,246,.62)",
-                  "0 0 18px rgba(139,92,246,.38)",
+                  "0 0 16px rgba(139,92,246,.35)",
+                  "0 0 36px rgba(168,85,247,.65)",
+                  "0 0 16px rgba(139,92,246,.35)",
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity }}
             />
-            <span className="relative z-10 flex items-center gap-2">
-              View My Work
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+            {/* shimmer on hover */}
+            <motion.span
+              className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background:
+                  "linear-gradient(105deg,transparent 38%,rgba(255,255,255,0.14) 50%,transparent 62%)",
+              }}
+            />
+            {/* folder icon */}
+            <svg
+              className="relative z-10 shrink-0"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 7a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            </svg>
+            <span className="relative z-10">View Projects</span>
+            {/* animated arrow-up-right */}
+            <motion.span
+              className="relative z-10"
+              animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                ↗
-              </motion.span>
-            </span>
+                <path d="M7 17 17 7M7 7h10v10" />
+              </svg>
+            </motion.span>
           </MagBtn>
 
-          <MagBtn className="px-8 py-3.5 border border-violet-500/35 text-violet-300 font-semibold text-[14px] rounded-xl hover:border-violet-400 hover:bg-violet-500/8 transition-colors">
+          {/* Download Resume — secondary pill (identical to Hire Me style) */}
+          <MagBtn
+            href="https://drive.google.com/uc?export=download&id=11Ulk24YXGYcoUZ75M5a-ulLRFB2HYfao"
+            download
+            className="relative inline-flex items-center gap-2 px-7 py-3 rounded-full font-mono font-semibold text-[13px] text-violet-200 border border-violet-500/40 bg-violet-500/8 overflow-hidden group"
+          >
+            {/* hover glow */}
             <motion.span
-              className="inline-flex items-center gap-2"
-              whileHover={{ x: 3 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center,rgba(139,92,246,.18) 0%,transparent 70%)",
+              }}
+            />
+            {/* pulse dot */}
+            {/* <motion.span
+              className="relative w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0"
+              animate={{ scale: [1, 1.55, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            /> */}
+            <SiReaddotcv />
+            <span className="relative z-10">Download Resume</span>
+            {/* animated download icon */}
+            <motion.span
+              className="relative z-10 text-violet-400"
+              animate={{ y: [0, 3, 0] }}
+              transition={{
+                duration: 1.6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
-              Contact Me
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                →
-              </motion.span>
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
             </motion.span>
           </MagBtn>
         </motion.div>

@@ -10,6 +10,7 @@ import {
     FaLayerGroup,
     FaMapMarkerAlt,
 } from "react-icons/fa";
+import { SiReaddotcv } from "react-icons/si";
 
 const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/172745014?v=4";
 
@@ -436,7 +437,7 @@ export default function About() {
             >
               {/* Primary: Download CV — filled pill */}
               <motion.a
-                href="/Wasif_Hasan_CV.pdf"
+                href="https://drive.google.com/uc?export=download&id=11Ulk24YXGYcoUZ75M5a-ulLRFB2HYfao"
                 download
                 className="relative inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-mono font-bold text-[13px] text-white overflow-hidden group"
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -460,12 +461,24 @@ export default function About() {
                   transition={{ duration: 3, repeat: Infinity }}
                 />
                 <span className="relative z-10 flex items-center gap-2">
-                  Download CV
+                  <SiReaddotcv /> Download Resume
                   <motion.span
                     animate={{ y: [0, 3, 0] }}
                     transition={{ duration: 1.4, repeat: Infinity }}
+                    className="flex items-center"
                   >
-                    ↓
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 5v14M5 12l7 7 7-7" />
+                    </svg>
                   </motion.span>
                 </span>
               </motion.a>
@@ -508,7 +521,18 @@ export default function About() {
                     ease: "easeInOut",
                   }}
                 >
-                  →
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </motion.span>
               </motion.a>
             </motion.div>

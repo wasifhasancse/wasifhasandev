@@ -1,19 +1,19 @@
 "use client";
 
 import {
-    AnimatePresence,
-    motion,
-    useMotionValue,
-    useSpring,
-    useTransform,
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
 } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 import {
-    FaChevronLeft,
-    FaChevronRight,
-    FaExternalLinkAlt,
-    FaGithub,
+  FaChevronLeft,
+  FaChevronRight,
+  FaExternalLinkAlt,
+  FaGithub,
 } from "react-icons/fa";
 
 const ALL_PROJECTS = [
@@ -24,8 +24,7 @@ const ALL_PROJECTS = [
     tech: ["React", "Node.js", "Express", "MongoDB"],
     link: "https://github.com/wasifhasancse/Spine-Online-Book-Borrowing-Platform",
     live: "https://spine-online-book-borrowing-platfor.vercel.app/",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
     accent: "#a855f7",
     tag: "Full Stack",
   },
@@ -245,42 +244,86 @@ function ProjectCard({ project }) {
           <p className="text-gray-500 text-[13px] leading-[1.75] mb-5 line-clamp-3 flex-1">
             {project.desc}
           </p>
-          <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
-            <a
+          <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto gap-2">
+            {/* Live Demo — primary pill */}
+            <motion.a
               href={project.live}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 font-semibold text-[13px] text-white"
+              className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono font-semibold text-[12px] text-white overflow-hidden group flex-1 justify-center"
+              whileHover={{ scale: 1.04, y: -1 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
             >
               <motion.span
-                className="flex items-center gap-1.5"
-                whileHover={{ x: 3 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: `${project.accent}22`,
+                  border: `1px solid ${project.accent}40`,
+                }}
+                whileHover={{ backgroundColor: `${project.accent}35` }}
+              />
+              <motion.span
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ boxShadow: `0 0 14px ${project.accent}45` }}
+              />
+              <FaExternalLinkAlt
+                size={10}
+                style={{ color: project.accent }}
+                className="relative z-10 shrink-0"
+              />
+              <span className="relative z-10" style={{ color: project.accent }}>
                 Live Demo
-                <motion.span
-                  style={{ color: project.accent }}
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{
-                    duration: 1.6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="flex items-center"
+              </span>
+              <motion.span
+                className="relative z-10"
+                style={{ color: project.accent }}
+                animate={{ x: [0, 3, 0], y: [0, -3, 0] }}
+                transition={{
+                  duration: 1.6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <FaExternalLinkAlt size={11} />
-                </motion.span>
+                  <path d="M7 17 17 7M7 7h10v10" />
+                </svg>
               </motion.span>
-            </a>
-            <a
+            </motion.a>
+
+            {/* GitHub — secondary pill */}
+            <motion.a
               href={project.link}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 font-mono text-[11px] text-gray-500 hover:text-gray-300 transition-colors"
+              className="relative inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-mono font-semibold text-[12px] text-violet-300 border border-violet-500/25 bg-violet-500/6 overflow-hidden group flex-1 justify-center"
+              whileHover={{
+                scale: 1.04,
+                y: -1,
+                borderColor: "rgba(168,85,247,0.6)",
+              }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
             >
-              <FaGithub size={13} />
-              GitHub
-            </a>
+              <motion.span
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center,rgba(139,92,246,.15) 0%,transparent 70%)",
+                }}
+              />
+              <FaGithub size={12} className="relative z-10 shrink-0" />
+              <span className="relative z-10">GitHub</span>
+            </motion.a>
           </div>
         </div>
 

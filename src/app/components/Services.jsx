@@ -409,10 +409,11 @@ export default function Services() {
               Let&apos;s build something great together.
             </p>
           </div>
-          <motion.button
+          <motion.a
+            href="#contact"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className="relative flex items-center gap-3 px-7 py-3.5 rounded-full font-bold text-[14px] text-white overflow-hidden shrink-0"
+            className="relative flex items-center gap-3 px-7 py-3.5 rounded-full font-bold text-[14px] text-white overflow-hidden shrink-0 group"
           >
             <motion.span
               className="absolute inset-0 rounded-full bg-linear-to-br from-violet-600 to-fuchsia-500"
@@ -445,7 +446,7 @@ export default function Services() {
                 <FaArrowRight size={12} />
               </motion.span>
             </span>
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>
