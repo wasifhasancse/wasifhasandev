@@ -1,10 +1,21 @@
-import { PortfolioClient } from "../components/PortfolioClient";
-import { getGithubProfile, getGithubRepos } from "../lib/github";
+import Hero from "./components/Hero";
+import Services from "./components/Services";
+import About from "./components/About";
+import Projects from "./components/Project";
+import Contact from "./components/Contact";
+import Experience from "./components/Experience";
+import TechMarquee from "./components/TechMarquee";
 
-export default async function HomePage() {
-  const [repos, profile] = await Promise.all([
-    getGithubRepos(),
-    getGithubProfile(),
-  ]);
-  return <PortfolioClient repos={repos} profile={profile} />;
+export default function Home() {
+  return (
+    <div>
+      <Hero />
+      <TechMarquee/>
+      <About/>
+      <Experience/>
+      <Services />
+      <Projects/>
+      <Contact/>
+    </div>
+  );
 }
