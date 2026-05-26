@@ -19,17 +19,28 @@ import {
 const ALL_PROJECTS = [
   {
     id: "01",
+    title: "IdeaVault — Startup Idea Sharing Platform",
+    desc: "IdeaVault is a full-stack web application built for entrepreneurs, startup enthusiasts, and innovators who want to share their business concepts with a wider community. The platform allows users to publish detailed startup ideas — complete with category, tags, estimated budget, target audience, problem statement, and proposed solution — and receive real feedback through upvotes and comments from fellow community members.",
+    tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth'],
+    link: "https://github.com/wasifhasancse/Spine-Online-Book-Borrowing-Platform",
+    live: "https://idea-vault-startup-idea-sharing.vercel.app/",
+    image: "https://i.ibb.co.com/wZCcV17X/Chat-GPT-Image-May-26-2026-03-11-44-PM.png",
+    accent: "#6FCF97",
+    tag: "Full Stack",
+  },
+  {
+    id: "02",
     title: "Spine — Online Book Borrowing Platform",
     desc: "A full-stack online book borrowing platform built with React and Node.js/Express backend. Features user authentication, book catalog management, and borrow/return workflows.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
     link: "https://github.com/wasifhasancse/Spine-Online-Book-Borrowing-Platform",
     live: "https://spine-online-book-borrowing-platfor.vercel.app/",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+    image: "https://i.ibb.co.com/6Rt6jY15/Chat-GPT-Image-May-26-2026-01-29-50-PM.png",
     accent: "#a855f7",
     tag: "Full Stack",
   },
   {
-    id: "02",
+    id: "03",
     title: "Pixgen — AI Image Gallery",
     desc: "An AI-powered image gallery where users can generate, browse, and manage AI-created images. Built with a modern React frontend integrated with AI image generation APIs.",
     tech: ["React", "Node.js", "AI API", "Tailwind"],
@@ -41,7 +52,7 @@ const ALL_PROJECTS = [
     tag: "AI App",
   },
   {
-    id: "03",
+    id: "04",
     title: "Payoo — Payment System",
     desc: "A web-based payment system interface with a clean, intuitive UI for managing transactions and payment workflows, designed for seamless user experience.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -53,7 +64,7 @@ const ALL_PROJECTS = [
     tag: "FinTech",
   },
   {
-    id: "04",
+    id: "05",
     title: "TechWave Podcast Website",
     desc: "A responsive podcast website for TechWave featuring episode listings, audio playback, and a modern layout built for an engaging tech listening experience.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -63,18 +74,6 @@ const ALL_PROJECTS = [
       "https://opengraph.githubassets.com/1/wasifhasancse/TechWave-Podcast-Website",
     accent: "#f97316",
     tag: "Media",
-  },
-  {
-    id: "05",
-    title: "Express CRUD — Full Stack App",
-    desc: "A complete CRUD application with a React frontend and Express.js backend demonstrating RESTful API design, MongoDB integration, and clean separation of concerns.",
-    tech: ["React", "Express.js", "MongoDB", "Node.js"],
-    link: "https://github.com/wasifhasancse/Express-CRUD-Frontend",
-    live: "https://github.com/wasifhasancse/Express-CRUD-Frontend",
-    image:
-      "https://opengraph.githubassets.com/1/wasifhasancse/Express-CRUD-Frontend",
-    accent: "#eab308",
-    tag: "Full Stack",
   },
 ];
 
@@ -301,7 +300,7 @@ function ProjectCard({ project }) {
             </motion.a>
 
             {/* GitHub — secondary pill */}
-            <motion.a
+            {project.link.includes("github.com")?(<motion.a
               href={project.link}
               target="_blank"
               rel="noreferrer"
@@ -323,7 +322,29 @@ function ProjectCard({ project }) {
               />
               <FaGithub size={12} className="relative z-10 shrink-0" />
               <span className="relative z-10">GitHub</span>
-            </motion.a>
+            </motion.a>):(<motion.span
+
+              rel="noreferrer"
+              className="relative inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-mono font-semibold text-[12px] text-violet-300 border border-violet-500/25 bg-violet-500/6 overflow-hidden group flex-1 justify-center"
+              whileHover={{
+                scale: 1.04,
+                y: -1,
+                borderColor: "rgba(168,85,247,0.6)",
+              }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+            >
+              <motion.span
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center,rgba(139,92,246,.15) 0%,transparent 70%)",
+                }}
+              />
+              <FaGithub size={12} className="relative z-10 shrink-0" />
+              <span className="relative z-10">Private Repository</span>
+            </motion.span>)}
+
           </div>
         </div>
 

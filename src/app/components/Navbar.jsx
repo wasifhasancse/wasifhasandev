@@ -1,10 +1,10 @@
 "use client";
 
 import {
-    AnimatePresence,
-    motion,
-    useMotionValueEvent,
-    useScroll,
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -138,7 +138,7 @@ export default function Navbar() {
           >
             {/* Spinning ring on logo hover */}
             <motion.div
-              className="absolute -inset-0.75 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute -inset-0.75 rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-300"
               style={{
                 background: "conic-gradient(from 0deg,#7c3aed,#a855f7,#7c3aed)",
               }}
@@ -159,13 +159,21 @@ export default function Navbar() {
 
           <div className="hidden sm:block">
             <motion.span
-              className="font-mono text-[13px] font-bold text-white tracking-tight"
+              className="text-lg font-bold text-white tracking-tight uppercase"
               animate={{ color: ["#ffffff", "#c4b5fd", "#ffffff"] }}
               transition={{ duration: 5, repeat: Infinity }}
             >
               wasif
             </motion.span>
-            <span className="font-mono text-[13px] text-violet-400">.dev</span>
+            <motion.span
+              className="text-lg font-medium uppercase"
+              animate={{
+                color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            >
+              dev
+            </motion.span>
           </div>
         </Link>
 
