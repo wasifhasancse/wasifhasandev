@@ -466,7 +466,7 @@ export default function Footer() {
             variants={fadeUp(0.05)}
             className="font-mono text-[11px] text-gray-700 flex items-center gap-1.5"
           >
-            Built with
+            Developed &amp; designed By
             <motion.span
               className="text-pink-500/70"
               animate={{ scale: [1, 1.35, 1] }}
@@ -478,7 +478,7 @@ export default function Footer() {
             >
               <TiHeartFullOutline />
             </motion.span>
-            using Next.js &amp; Framer Motion
+            Wasif Hasan
           </motion.p>
         </motion.div>
       </div>
