@@ -4,10 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-/* ─── Tabs ──────────────────────────────────────────────── */
 const TABS = ["All", "Frontend", "Backend", "Tools", "AI & DevOps"];
 
-/* ─── Tech Data ─────────────────────────────────────────── */
 const TECHS = [
   /* ── Frontend ── */
   {
