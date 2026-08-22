@@ -46,7 +46,7 @@ const ALL_PROJECTS = [
     tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth'],
     link: "https://github.com/wasifhasancse/Spine-Online-Book-Borrowing-Platform",
     live: "https://idea-vault-startup-idea-sharing.vercel.app/",
-    image: "https://i.ibb.co.com/wZCcV17X/Chat-GPT-Image-May-26-2026-03-11-44-PM.png",
+    image: "https://i.ibb.co.com/0yf22323/Screenshot-2026-08-23-025217.png",
     accent: "#6FCF97",
     tag: "Full Stack",
   },
@@ -68,8 +68,7 @@ const ALL_PROJECTS = [
     tech: ["React", "Node.js", "AI API", "Tailwind"],
     link: "https://github.com/wasifhasancse/Pixgen-AI-Image-Gallery",
     live: "https://github.com/wasifhasancse/Pixgen-AI-Image-Gallery",
-    image:
-      "https://opengraph.githubassets.com/1/wasifhasancse/Pixgen-AI-Image-Gallery",
+    image: "https://i.ibb.co.com/sTh4y2V/Screenshot-2026-08-23-025513.png",
     accent: "#3b82f6",
     tag: "AI App",
   },
@@ -92,8 +91,7 @@ const ALL_PROJECTS = [
     tech: ["HTML", "CSS", "JavaScript"],
     link: "https://github.com/wasifhasancse/TechWave-Podcast-Website",
     live: "https://github.com/wasifhasancse/TechWave-Podcast-Website",
-    image:
-      "https://opengraph.githubassets.com/1/wasifhasancse/TechWave-Podcast-Website",
+    image: "https://i.ibb.co.com/1hTYQhq/Screenshot-2026-08-23-025433.png",
     accent: "#f97316",
     tag: "Media",
   },
