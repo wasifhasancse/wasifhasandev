@@ -32,7 +32,7 @@ const ALL_PROJECTS = [
     id: "02",
     title: "FlexPulse - Fitness & Gym Management Platform",
     desc: "FlexPulse is a full-stack fitness platform for members, trainers, and admins. Members can discover classes, book sessions, save favorites, and join forum discussions. Trainers can create/manage classes and publish forum posts. Admins moderate users, classes, trainer applications, transactions, and community content.",
-    tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth','Stripe', 'JWT'],
+    tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth', 'Stripe', 'JWT'],
     link: "https://github.com/wasifhasancse/FlexPulse-Fitness-Gym-Management-Platform.git",
     live: "https://flex-pulse-fitness-gym.vercel.app/",
     image: "https://i.ibb.co.com/6cc3S82j/Screenshot-2026-08-23-024929.png",
@@ -79,8 +79,7 @@ const ALL_PROJECTS = [
     tech: ["HTML", "CSS", "JavaScript"],
     link: "https://github.com/wasifhasancse/payoo-payment-system",
     live: "https://github.com/wasifhasancse/payoo-payment-system",
-    image:
-      "https://opengraph.githubassets.com/1/wasifhasancse/payoo-payment-system",
+    image: "https://i.ibb.co.com/vC4YwmhT/Gemini-Generated-Image-26y5v426y5v426y5.jpg",
     accent: "#22c55e",
     tag: "FinTech",
   },
@@ -320,7 +319,7 @@ function ProjectCard({ project }) {
             </motion.a>
 
             {/* GitHub — secondary pill */}
-            {project.link.includes("github.com")?(<motion.a
+            {project.link.includes("github.com") ? (<motion.a
               href={project.link}
               target="_blank"
               rel="noreferrer"
@@ -342,7 +341,7 @@ function ProjectCard({ project }) {
               />
               <FaGithub size={12} className="relative z-10 shrink-0" />
               <span className="relative z-10">GitHub</span>
-            </motion.a>):(<motion.span
+            </motion.a>) : (<motion.span
 
               rel="noreferrer"
               className="relative inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-mono font-semibold text-[12px] text-violet-300 border border-violet-500/25 bg-violet-500/6 overflow-hidden group flex-1 justify-center"
