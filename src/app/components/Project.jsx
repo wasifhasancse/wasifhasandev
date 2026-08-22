@@ -19,6 +19,17 @@ import {
 const ALL_PROJECTS = [
   {
     id: "01",
+    title: "Flavor Matrix - Recipe Sharing Platform",
+    desc: "Flavor Matrix is a comprehensive full-stack recipe sharing platform where culinary enthusiasts can discover, create, and manage recipes. Users can explore a vast collection of recipes, use AI-powered tools for culinary advice and recipe generation, and purchase premium recipes. Admins and users have dedicated dashboards to manage their interactions and content seamlessly.",
+    tech: ["Next.js", 'TypeScript', "Express.js", "MongoDB", 'Better Auth', 'Stripe'],
+    link: "https://github.com/wasifhasancse/Flavor-Matrix-Recipe-Sharing-Platform.git",
+    live: "https://flavor-matrix-recipe-sharing-platform.vercel.app/",
+    image: "https://i.ibb.co.com/YFDJgh2N/Screenshot-2026-08-16-194420.png",
+    accent: "#6FCF97",
+    tag: "Full Stack",
+  },
+  {
+    id: "02",
     title: "IdeaVault — Startup Idea Sharing Platform",
     desc: "IdeaVault is a full-stack web application built for entrepreneurs, startup enthusiasts, and innovators who want to share their business concepts with a wider community. The platform allows users to publish detailed startup ideas — complete with category, tags, estimated budget, target audience, problem statement, and proposed solution — and receive real feedback through upvotes and comments from fellow community members.",
     tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth'],
@@ -29,7 +40,18 @@ const ALL_PROJECTS = [
     tag: "Full Stack",
   },
   {
-    id: "02",
+    id: "03",
+    title: "IdeaVault — Startup Idea Sharing Platform",
+    desc: "IdeaVault is a full-stack web application built for entrepreneurs, startup enthusiasts, and innovators who want to share their business concepts with a wider community. The platform allows users to publish detailed startup ideas — complete with category, tags, estimated budget, target audience, problem statement, and proposed solution — and receive real feedback through upvotes and comments from fellow community members.",
+    tech: ["Next.js", "Express.js", "MongoDB", 'Better Auth'],
+    link: "https://github.com/wasifhasancse/Spine-Online-Book-Borrowing-Platform",
+    live: "https://idea-vault-startup-idea-sharing.vercel.app/",
+    image: "https://i.ibb.co.com/wZCcV17X/Chat-GPT-Image-May-26-2026-03-11-44-PM.png",
+    accent: "#6FCF97",
+    tag: "Full Stack",
+  },
+  {
+    id: "04",
     title: "Spine — Online Book Borrowing Platform",
     desc: "A full-stack online book borrowing platform built with React and Node.js/Express backend. Features user authentication, book catalog management, and borrow/return workflows.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
@@ -40,7 +62,7 @@ const ALL_PROJECTS = [
     tag: "Full Stack",
   },
   {
-    id: "03",
+    id: "05",
     title: "Pixgen — AI Image Gallery",
     desc: "An AI-powered image gallery where users can generate, browse, and manage AI-created images. Built with a modern React frontend integrated with AI image generation APIs.",
     tech: ["React", "Node.js", "AI API", "Tailwind"],
@@ -52,7 +74,7 @@ const ALL_PROJECTS = [
     tag: "AI App",
   },
   {
-    id: "04",
+    id: "06",
     title: "Payoo — Payment System",
     desc: "A web-based payment system interface with a clean, intuitive UI for managing transactions and payment workflows, designed for seamless user experience.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -64,7 +86,7 @@ const ALL_PROJECTS = [
     tag: "FinTech",
   },
   {
-    id: "05",
+    id: "07",
     title: "TechWave Podcast Website",
     desc: "A responsive podcast website for TechWave featuring episode listings, audio playback, and a modern layout built for an engaging tech listening experience.",
     tech: ["HTML", "CSS", "JavaScript"],
