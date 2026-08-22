@@ -437,7 +437,7 @@ export default function About() {
             >
               {/* Primary: Download CV — filled pill */}
               <motion.a
-                href="https://drive.google.com/uc?export=download&id=11Ulk24YXGYcoUZ75M5a-ulLRFB2HYfao"
+                href="https://drive.google.com/uc?export=download&id=1-niu5eaHn5rGDQOG6xNdLocVwWrA8L56"
                 download
                 className="relative inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-mono font-bold text-[13px] text-white overflow-hidden group"
                 whileHover={{ scale: 1.05, y: -2 }}
