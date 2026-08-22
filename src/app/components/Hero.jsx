@@ -520,7 +520,7 @@ export default function Hero() {
 
           {/* Download Resume — secondary pill (identical to Hire Me style) */}
           <MagBtn
-            href="https://drive.google.com/uc?export=download&id=11Ulk24YXGYcoUZ75M5a-ulLRFB2HYfao"
+            href="https://drive.google.com/uc?export=download&id=1-niu5eaHn5rGDQOG6xNdLocVwWrA8L56"
             download
             className="relative inline-flex items-center gap-2 px-7 py-3 rounded-full font-mono font-semibold text-[13px] text-violet-200 border border-violet-500/40 bg-violet-500/8 overflow-hidden group"
           >
