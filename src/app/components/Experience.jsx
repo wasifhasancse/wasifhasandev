@@ -30,17 +30,17 @@ const EXPERIENCE = [
     tags: ["Next.js", "React", "Node.js", "MongoDB", "Express", "Tailwind"],
     status: "active",
   },
-  {
-    year: "2025 – Present",
-    title: "MERN Stack Specialization",
-    organization: "Programming Hero",
-    description:
-      "Completing an intensive professional software engineering program focused on the MERN stack. Built 50+ projects including SkillSphere (online learning platform), Spine (book borrowing system), and Pixgen (AI image gallery).",
-    Icon: FaServer,
-    accent: "#f59e0b",
-    tags: ["MongoDB", "Express", "React", "Node.js", "Firebase", "JWT"],
-    status: "active",
-  },
+  // {
+  //   year: "2025 – Present",
+  //   title: "MERN Stack Specialization",
+  //   organization: "Programming Hero",
+  //   description:
+  //     "Completing an intensive professional software engineering program focused on the MERN stack. Built 50+ projects including SkillSphere (online learning platform), Spine (book borrowing system), and Pixgen (AI image gallery).",
+  //   Icon: FaServer,
+  //   accent: "#f59e0b",
+  //   tags: ["MongoDB", "Express", "React", "Node.js", "Firebase", "JWT"],
+  //   status: "active",
+  // },
   {
     year: "2024 – 2025",
     title: "100 Days of Code Challenge",
@@ -74,7 +74,7 @@ const EDUCATION = [
   },
   {
     year: "2025 – Present",
-    title: "MERN Stack Certification",
+    title: "Complete Web Development Course With Programming Hero",
     organization: "Programming Hero",
     description:
       "Pursuing a professional certification in full stack web development with specialization in MERN Stack and Next.js, covering frontend engineering, backend API design, authentication, and deployment.",
