@@ -163,19 +163,19 @@ export default function Footer() {
 
             <motion.div
               variants={fadeUp(0.05)}
-              className="flex items-baseline gap-1 mb-3"
+              className="flex flex-col gap-0.5 mb-3"
             >
-              <span className="uppercase text-4xl font-black text-white tracking-tight">
-                wasif
+              <span className="text-4xl font-black text-white tracking-tight">
+                Wasif Hasan
               </span>
               <motion.span
-                className="uppercase text-4xl font-medium"
+                className="font-mono text-sm tracking-[.15em] uppercase"
                 animate={{
                   color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
               >
-                dev
+                Full Stack Developer
               </motion.span>
             </motion.div>
 
