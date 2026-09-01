@@ -157,22 +157,22 @@ export default function Navbar() {
             </div>
           </motion.div>
 
-          <div className="hidden sm:block">
+          <div className="hidden sm:flex flex-col leading-none">
             <motion.span
-              className="text-lg font-bold text-white tracking-tight uppercase"
+              className="text-[15px] font-extrabold tracking-tight text-white"
               animate={{ color: ["#ffffff", "#c4b5fd", "#ffffff"] }}
               transition={{ duration: 5, repeat: Infinity }}
             >
-              wasif
+              Wasif Hasan
             </motion.span>
             <motion.span
-              className="text-lg font-medium uppercase"
+              className="text-[10px] font-mono tracking-[.15em] uppercase"
               animate={{
                 color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              dev
+              Full Stack Developer
             </motion.span>
           </div>
         </Link>
