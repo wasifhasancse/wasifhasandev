@@ -94,23 +94,25 @@ const skillVariant = {
   },
 };
 
-/* ─── 3-D Tilt Card ─────────────────────────────────────── */
+/* ─── 3-D Interactive Tilt Card ─────────────────────────── */
 function TiltCard({ children, className }) {
   const ref = useRef(null);
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
-  const srx = useSpring(rx, { stiffness: 120, damping: 16 });
-  const sry = useSpring(ry, { stiffness: 120, damping: 16 });
+  const srx = useSpring(rx, { stiffness: 140, damping: 18 });
+  const sry = useSpring(ry, { stiffness: 140, damping: 18 });
   const rotX = useTransform(srx, (v) => `${v}deg`);
   const rotY = useTransform(sry, (v) => `${v}deg`);
 
   const onMove = (e) => {
+    if (!ref.current) return;
     const r = ref.current.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;
-    rx.set(-py * 14);
-    ry.set(px * 14);
+    rx.set(-py * 16);
+    ry.set(px * 16);
   };
+
   const onLeave = () => {
     rx.set(0);
     ry.set(0);
@@ -123,7 +125,7 @@ function TiltCard({ children, className }) {
         rotateX: rotX,
         rotateY: rotY,
         transformStyle: "preserve-3d",
-        perspective: 800,
+        perspective: 1200,
       }}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
@@ -134,15 +136,17 @@ function TiltCard({ children, className }) {
   );
 }
 
-/* ─── Animated Counter ──────────────────────────────────── */
+/* ─── Animated Stat Card ────────────────────────────────── */
 function StatBadge({ num, label, delay }) {
   return (
     <motion.div
       variants={fadeUp(delay)}
-      className="flex flex-col items-center gap-1"
+      whileHover={{ scale: 1.06, y: -3 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className="flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border border-violet-500/20 bg-[#0f0b1e]/60 backdrop-blur-md shadow-lg shadow-violet-950/20 group min-w-[95px] sm:min-w-[110px]"
     >
       <motion.span
-        className="text-3xl font-extrabold bg-linear-to-br from-violet-300 to-fuchsia-400 bg-clip-text text-transparent"
+        className="text-2xl sm:text-3xl font-black bg-linear-to-r from-violet-200 via-fuchsia-300 to-violet-400 bg-clip-text text-transparent group-hover:scale-105 transition-transform"
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 14, delay }}
@@ -150,7 +154,7 @@ function StatBadge({ num, label, delay }) {
       >
         {num}
       </motion.span>
-      <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500">
+      <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-gray-400 group-hover:text-violet-300 transition-colors mt-0.5 text-center">
         {label}
       </span>
     </motion.div>
@@ -212,8 +216,8 @@ export default function About() {
         </motion.div>
 
         {/* Main 2-col layout */}
-        <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
-          {/* ── Left: Avatar ── */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-16 lg:gap-20">
+          {/* ── Left: Avatar Presentation ── */}
           <motion.div
             className="w-full lg:w-auto shrink-0 flex flex-col items-center gap-8"
             initial="hidden"
@@ -221,61 +225,132 @@ export default function About() {
             viewport={{ once: true, margin: "-60px" }}
             variants={stagger(0)}
           >
-            {/* Avatar card with 3D tilt */}
+            {/* Avatar card with multi-layer 3D tilt */}
             <motion.div variants={fadeUp(0)}>
-              <TiltCard className="relative w-80 h-80 md:w-105 md:h-105">
-                {/* Glow */}
-                <div className="absolute inset-0 rounded-3xl bg-violet-500/15 blur-[50px]" />
-                {/* Spinning border */}
+              <TiltCard className="relative w-72 h-72 sm:w-84 sm:h-84 md:w-96 md:h-96 group select-none">
+                {/* 1. Deep Neon Aura Glow */}
                 <motion.div
-                  className="absolute -inset-0.75 rounded-3xl"
+                  className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 opacity-30 blur-2xl group-hover:opacity-60 transition-opacity duration-500"
+                  animate={{ scale: [1, 1.04, 1] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                {/* 2. Outer Rotating Cyber Conic Border */}
+                <motion.div
+                  className="absolute -inset-[3px] rounded-[2.2rem]"
                   style={{
                     background:
-                      "conic-gradient(from 0deg,#7c3aed,#a855f7,#c084fc,transparent,#7c3aed)",
+                      "conic-gradient(from 0deg, #7c3aed, #ec4899, #8b5cf6, #3b82f6, #7c3aed)",
                   }}
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                 />
-                {/* Image */}
-                <div className="relative z-10 w-full h-full rounded-full overflow-hidden bg-[#0f0b1e] border border-violet-500/10">
-                  <Image
-                    src={GITHUB_AVATAR}
-                    alt="Wasif Hasan"
-                    priority
-                    sizes="288px"
-                    fill
-                    className="object-cover object-[center_15%]"
-                  />
-                  {/* Subtle bottom fade */}
-                  <div className="absolute inset-0 bg-linear-to-t from-[#060412]/40 via-transparent to-transparent" />
+
+                {/* 3. Main Glass Frame */}
+                <div
+                  className="relative z-10 w-full h-full rounded-[2rem] p-3 bg-[#0a0618]/90 backdrop-blur-2xl border border-white/10 overflow-hidden shadow-2xl flex flex-col"
+                  style={{ transform: "translateZ(20px)" }}
+                >
+                  {/* Portrait Image Container */}
+                  <div className="relative w-full h-full rounded-[1.6rem] overflow-hidden bg-[#060412]">
+                    <Image
+                      src={GITHUB_AVATAR}
+                      alt="Wasif Hasan"
+                      priority
+                      sizes="(max-width: 768px) 300px, 384px"
+                      fill
+                      className="object-cover object-[center_15%] group-hover:scale-108 transition-transform duration-700 ease-out"
+                    />
+
+                    {/* Gradient Overlay Vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#060412]/80 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Futuristic Cyber Laser Scanline Beam */}
+                    <motion.div
+                      className="absolute left-0 right-0 h-16 bg-gradient-to-b from-transparent via-violet-400/25 to-transparent pointer-events-none border-b border-violet-400/50 shadow-[0_0_12px_rgba(168,85,247,0.5)]"
+                      animate={{ top: ["-20%", "120%"] }}
+                      transition={{
+                        duration: 3.5,
+                        repeat: Infinity,
+                        ease: "linear",
+                        repeatDelay: 1.5,
+                      }}
+                    />
+
+                    {/* Futuristic HUD Corner Crosshairs */}
+                    <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-violet-400/70 pointer-events-none" />
+                    <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-violet-400/70 pointer-events-none" />
+                    <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-violet-400/70 pointer-events-none" />
+                    <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-violet-400/70 pointer-events-none" />
+                  </div>
                 </div>
 
-                {/* Floating badge */}
+                {/* ── 3D Floating Badges (Floating above frame) ── */}
+
+                {/* Badge 1: Top-Right "Available for Work" */}
                 <motion.div
-                  className="absolute -top-5 -right-5 bg-violet-600 text-white px-3.5 py-2 rounded-2xl text-[13px] font-semibold shadow-lg shadow-violet-600/40 z-20 whitespace-nowrap"
-                  initial={{ rotate: -12, scale: 0, opacity: 0 }}
-                  whileInView={{ rotate: -6, scale: 1, opacity: 1 }}
+                  className="absolute -top-4 -right-3 sm:-top-5 sm:-right-4 z-30 pointer-events-auto"
+                  style={{ transform: "translateZ(60px)" }}
+                  animate={{ y: [0, -7, 0] }}
                   transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 14,
-                    delay: 0.4,
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
                   }}
-                  viewport={{ once: true }}
-                  whileHover={{ rotate: -2, scale: 1.06 }}
+                  whileHover={{ scale: 1.08 }}
                 >
-                  Building the future ✨
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl bg-[#0f0b1e]/90 border border-emerald-500/40 backdrop-blur-xl shadow-xl shadow-emerald-950/30">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                    <span className="font-mono text-[11px] sm:text-xs font-semibold text-emerald-300 whitespace-nowrap">
+                      Available for Work
+                    </span>
+                  </div>
                 </motion.div>
 
-                {/* Bottom name chip */}
+                {/* Badge 2: Top-Left "Full Stack Dev" */}
                 <motion.div
-                  className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#0f0b1e] border border-violet-500/30 px-4 py-2 rounded-full text-[13px] font-mono text-violet-300 whitespace-nowrap z-20 shadow-xl"
-                  initial={{ y: 16, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5, ease: expo, duration: 0.6 }}
-                  viewport={{ once: true }}
+                  className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 z-30 pointer-events-auto"
+                  style={{ transform: "translateZ(50px)" }}
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{
+                    duration: 3.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5,
+                  }}
+                  whileHover={{ scale: 1.08 }}
                 >
-                  @wasifhasancse
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-[#0f0b1e]/90 border border-violet-500/40 backdrop-blur-xl shadow-xl shadow-violet-950/30">
+                    <span className="text-violet-400 text-xs">⚡</span>
+                    <span className="font-mono text-[10.5px] sm:text-[11px] font-bold text-violet-200 whitespace-nowrap">
+                      Full-Stack Dev
+                    </span>
+                  </div>
+                </motion.div>
+
+                {/* Badge 3: Bottom Identity Chip "@wasifhasancse" */}
+                <motion.div
+                  className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-30 pointer-events-auto"
+                  style={{ transform: "translateZ(70px)" }}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{
+                    duration: 2.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.2,
+                  }}
+                  whileHover={{ scale: 1.06 }}
+                >
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#0a0618]/95 border border-violet-500/40 backdrop-blur-xl shadow-2xl shadow-violet-950/50">
+                    <FaGithub className="text-violet-400 text-sm" />
+                    <span className="font-mono text-xs font-semibold text-violet-200 tracking-wide">
+                      @wasifhasancse
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                  </div>
                 </motion.div>
               </TiltCard>
             </motion.div>
@@ -286,7 +361,7 @@ export default function About() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex gap-8 mt-6"
+              className="flex gap-3 sm:gap-4 mt-6 justify-center flex-wrap"
             >
               {stats.map((s, i) => (
                 <StatBadge
