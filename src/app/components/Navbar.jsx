@@ -157,16 +157,16 @@ export default function Navbar() {
             </div>
           </motion.div>
 
-          <div className="hidden sm:flex flex-col leading-none">
+          <div className="hidden sm:flex flex-col gap-[1px] leading-none">
             <motion.span
-              className="text-[15px] font-extrabold tracking-tight text-white"
+              className="text-[15px] font-extrabold tracking-tight text-white group-hover:text-violet-100 transition-colors duration-300"
               animate={{ color: ["#ffffff", "#c4b5fd", "#ffffff"] }}
               transition={{ duration: 5, repeat: Infinity }}
             >
               Wasif Hasan
             </motion.span>
             <motion.span
-              className="text-[10px] font-mono tracking-[.15em] uppercase"
+              className="text-[9.5px] font-mono tracking-[.18em] uppercase opacity-80 group-hover:opacity-100 transition-opacity duration-300"
               animate={{
                 color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
               }}
