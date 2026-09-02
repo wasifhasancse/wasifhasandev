@@ -130,47 +130,70 @@ export default function Navbar() {
 
       <div className="relative max-w-6xl mx-auto px-6 h-17 flex items-center justify-between">
         {/* ── Logo ── */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link
+          href="/"
+          className="flex items-center gap-3 sm:gap-3.5 group select-none"
+          aria-label="Wasif Hasan - Home"
+        >
           <motion.div
             className="relative"
-            whileHover={{ scale: 1.07 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 350, damping: 20 }}
           >
-            {/* Spinning ring on logo hover */}
+            {/* Ambient glow on hover */}
+            <div className="absolute -inset-1 rounded-full bg-linear-to-r from-violet-600 via-fuchsia-500 to-indigo-600 opacity-0 group-hover:opacity-75 blur-md transition-opacity duration-300" />
+
+            {/* Rotating gradient ring */}
             <motion.div
-              className="absolute -inset-0.75 rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-300"
+              className="absolute -inset-[2px] rounded-full"
               style={{
-                background: "conic-gradient(from 0deg,#7c3aed,#a855f7,#7c3aed)",
+                background:
+                  "conic-gradient(from 0deg, #7c3aed, #a855f7, #c084fc, #6366f1, #7c3aed)",
               }}
               animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             />
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-violet-500/30">
-              <Image
-                src={GITHUB_AVATAR}
-                priority
-                sizes="40px"
-                alt="Wasif Hasan"
-                fill
-                className="object-cover"
-              />
+
+            {/* Avatar container */}
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-[#0a0618] p-[1.5px]">
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                <Image
+                  src={GITHUB_AVATAR}
+                  priority
+                  sizes="44px"
+                  alt="Wasif Hasan"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
             </div>
+
+            {/* Live active status indicator dot */}
+            <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#060412] shadow-xs shadow-emerald-400">
+              <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+            </span>
           </motion.div>
 
-          <div className="hidden sm:flex flex-col gap-[1px] leading-none">
+          {/* Logo Text Identity */}
+          <div className="flex flex-col justify-center gap-[1.5px] leading-none">
+            <div className="flex items-center gap-1.5">
+              <motion.span
+                className="text-[14px] sm:text-[16px] font-extrabold tracking-tight text-white group-hover:text-violet-200 transition-colors duration-200"
+                animate={{ color: ["#ffffff", "#e9d5ff", "#ffffff"] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                Wasif Hasan
+              </motion.span>
+              <span className="w-1 h-1 rounded-full bg-violet-400/80 group-hover:bg-fuchsia-400 transition-colors" />
+            </div>
+
             <motion.span
-              className="text-[15px] font-extrabold tracking-tight text-white group-hover:text-violet-100 transition-colors duration-300"
-              animate={{ color: ["#ffffff", "#c4b5fd", "#ffffff"] }}
-              transition={{ duration: 5, repeat: Infinity }}
-            >
-              Wasif Hasan
-            </motion.span>
-            <motion.span
-              className="text-[9.5px] font-mono tracking-[.18em] uppercase opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+              className="text-[8.5px] sm:text-[10px] font-mono tracking-[0.14em] sm:tracking-[0.18em] uppercase font-semibold"
               animate={{
-                color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
+                color: ["#c084fc", "#e879f9", "#a855f7", "#c084fc"],
               }}
-              transition={{ duration: 4, repeat: Infinity }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               Full Stack Developer
             </motion.span>

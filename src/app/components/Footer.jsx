@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import {
   FaBriefcase,
   FaCode,
@@ -12,6 +14,8 @@ import {
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { TiHeartFullOutline } from "react-icons/ti";
+
+const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/172745014?v=4";
 
 /* ─── Data ─────────────────────────────────────────────── */
 const LINKS = [
@@ -149,39 +153,65 @@ export default function Footer() {
           variants={stagger(0)}
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14"
         >
-          {/* Left: name + bio */}
+          {/* Left: Brand identity + bio */}
           <div className="max-w-md">
-            <motion.div
-              variants={fadeUp(0)}
-              className="flex items-center gap-3 mb-4"
-            >
-              <span className="h-px w-8 bg-linear-to-r from-transparent to-violet-500/50" />
-              <span className="font-mono text-[10px] tracking-[.2em] uppercase text-violet-400/50">
-                Full Stack Developer
-              </span>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp(0.05)}
-              className="flex flex-col gap-0.5 mb-3"
-            >
-              <span className="text-4xl font-black text-white tracking-tight">
-                Wasif Hasan
-              </span>
-              <motion.span
-                className="font-mono text-sm tracking-[.15em] uppercase"
-                animate={{
-                  color: ["#a855f7", "#c084fc", "#e879f9", "#a855f7"],
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
+            <motion.div variants={fadeUp(0)} className="mb-4">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-3.5 group select-none"
+                aria-label="Wasif Hasan"
               >
-                Full Stack Developer
-              </motion.span>
+                <div className="relative">
+                  {/* Glowing ring */}
+                  <motion.div
+                    className="absolute -inset-[2px] rounded-full"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #7c3aed, #a855f7, #c084fc, #6366f1, #7c3aed)",
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  />
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden bg-[#0a0618] p-[1.5px]">
+                    <div className="relative w-full h-full rounded-full overflow-hidden">
+                      <Image
+                        src={GITHUB_AVATAR}
+                        sizes="48px"
+                        alt="Wasif Hasan"
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                  {/* Status dot */}
+                  <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#060412]">
+                    <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-violet-200 transition-colors">
+                      Wasif Hasan
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+                  </div>
+                  <motion.span
+                    className="font-mono text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold"
+                    animate={{
+                      color: ["#c084fc", "#e879f9", "#a855f7", "#c084fc"],
+                    }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    Full Stack Developer
+                  </motion.span>
+                </div>
+              </Link>
             </motion.div>
 
             <motion.p
               variants={fadeUp(0.1)}
-              className="text-gray-500 text-[13px] leading-relaxed mb-5"
+              className="text-gray-400 text-[13.5px] leading-relaxed mb-6"
             >
               MERN Stack Developer crafting high-performance, scalable web
               applications with clean code and modern UI/UX.
