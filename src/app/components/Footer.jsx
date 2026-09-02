@@ -164,7 +164,7 @@ export default function Footer() {
                 <div className="relative">
                   {/* Glowing ring */}
                   <motion.div
-                    className="absolute -inset-[2px] rounded-full"
+                    className="absolute -inset-0.5 rounded-full"
                     style={{
                       background:
                         "conic-gradient(from 0deg, #7c3aed, #a855f7, #c084fc, #6366f1, #7c3aed)",
