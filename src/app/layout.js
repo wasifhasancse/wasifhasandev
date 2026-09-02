@@ -4,14 +4,10 @@ import Navbar from "./components/Navbar";
 import "./globals.css";
 import SmoothScrollProvider from "./provider/SmoothScrolling";
 
-/* ── Fonts ─────────────────────────────────────────────────
-   next/font handles preload automatically — no manual
-   <link rel="preload"> needed (that caused your warnings).
-─────────────────────────────────────────────────────────── */
 const syne = Syne({
   subsets: ["latin"],
   variable: "--font-syne",
-  display: "swap", // ✅ prevents FOUT
+  display: "swap",
 });
 
 const mono = JetBrains_Mono({
