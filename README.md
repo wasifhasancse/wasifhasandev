@@ -8,5 +8,3 @@ First, run the development server:
 npm run dev
 
 ```
-
-You can start editing the page by modifying `app/page.js`. 
